@@ -1,0 +1,24 @@
+name: test
+on: 
+  push:
+    branches: ["main"]
+jobs:
+  build: 
+    runs-on: ubuntu-latest
+    steps:
+      - name: checkout repo 
+        uses: actions/checkout@v2
+      - name: executing remote ssh commands using password # 수행 단계 식별이름
+        uses: appleboy/ssh-action@master # ssh 접속을 사용
+        with:
+          key: ${{secrets.AWS_PEM_KEY}} # GitHub secret에 저장된 PEM
+          host: ${{ secrets.AWS_HOST }} # GitHub secret에 저장된 HOST
+          username: ${{ secrets.AWS_USERNAME }} # GitHub secret에 저장된 USERNAME
+          script: |
+            cd ~/test
+            echo "> change dir to test"
+            git pull https://dlwl98:${{secrets.GIT_TOKEN}}@github.com/team-recreation/test
+            echo "> git pull"
+            npm i 
+            echo "> install"
+            
