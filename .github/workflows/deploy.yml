@@ -17,7 +17,7 @@ jobs:
           script: |
             cd ~/test
             echo "> change dir to test"
-            git pull https://dlwl98:${{secrets.GIT_TOKEN}}@github.com/team-recreation/test
+            git pull https://dlwl98:${{secrets.GIT_TOKEN}}@github.com/dlwl98/Recreation
             echo "> git pull"
             npm i 
             echo "> install"
