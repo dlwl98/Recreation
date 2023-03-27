@@ -28,4 +28,10 @@ jobs:
             echo "> client build"
             systemctl restart nginx
             echo "> serve client"
+            cd ~/Recreation/server
+            yarn
+            echo "> server install"
+            pm2 reload nest
+            echo "> depoly server"
+
             
