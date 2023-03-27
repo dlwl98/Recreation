@@ -26,7 +26,7 @@ jobs:
             echo "> client install"
             yarn build
             echo "> client build"
-            systemctl restart nginx
+            sudo systemctl restart nginx
             echo "> serve client"
             cd ~/Recreation/server
             yarn
