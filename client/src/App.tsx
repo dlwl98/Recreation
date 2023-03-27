@@ -28,6 +28,7 @@ function App() {
       <p className="read-the-docs">
         Click on the Vite and React logos to learn more
       </p>
+      <img src="https://recreation-bucket.s3.ap-northeast-2.amazonaws.com/ggg.png"/>
     </div>
   )
 }
