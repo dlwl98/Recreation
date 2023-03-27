@@ -19,6 +19,7 @@ jobs:
             echo "> change dir to Recreation"
             git pull https://dlwl98:${{secrets.GIT_TOKEN}}@github.com/dlwl98/Recreation
             echo "> git pull"
+            cd ~/Recreation/client
             npm i 
             echo "> install"
             
