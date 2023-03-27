@@ -21,5 +21,9 @@ jobs:
             echo "> git pull"
             cd ~/Recreation/client
             npm i 
-            echo "> install"
+            echo "> client install"
+            npm run build
+            echo "> client build"
+            systemctl restart nginx
+            echo "> serve client"
             
