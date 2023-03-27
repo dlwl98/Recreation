@@ -15,8 +15,8 @@ jobs:
           host: ${{ secrets.AWS_HOST }} # GitHub secret에 저장된 HOST
           username: ${{ secrets.AWS_USERNAME }} # GitHub secret에 저장된 USERNAME
           script: |
-            cd ~/test
-            echo "> change dir to test"
+            cd ~/Recreation
+            echo "> change dir to Recreation"
             git pull https://dlwl98:${{secrets.GIT_TOKEN}}@github.com/dlwl98/Recreation
             echo "> git pull"
             npm i 
