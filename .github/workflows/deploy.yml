@@ -22,9 +22,9 @@ jobs:
             git pull https://dlwl98:${{secrets.GIT_TOKEN}}@github.com/dlwl98/Recreation
             echo "> git pull"
             cd ~/Recreation/client
-            npm i 
+            yarn 
             echo "> client install"
-            npm run build
+            yarn build
             echo "> client build"
             systemctl restart nginx
             echo "> serve client"
