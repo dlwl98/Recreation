@@ -18,6 +18,7 @@ function App() {
           Learn React
         </a>
       </header>
+      <img src="https://recreation-bucket.s3.ap-northeast-2.amazonaws.com/ggg.png"/>
     </div>
   );
 }
