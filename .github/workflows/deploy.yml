@@ -30,6 +30,7 @@ jobs:
             echo "> serve client"
             cd ~/Recreation/server
             yarn
+            yarn build
             echo "> server install"
             pm2 reload nest
             echo "> depoly server"
