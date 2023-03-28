@@ -18,21 +18,21 @@ jobs:
             export NVM_DIR=~/.nvm
             source ~/.nvm/nvm.sh
             cd ~/Recreation
-            echo "> change dir to Recreation"
+            echo "=========== change dir to Recreation ==========="
             git pull https://dlwl98:${{secrets.GIT_TOKEN}}@github.com/dlwl98/Recreation
-            echo "> git pull"
+            echo "=========== git pull ==========="
             cd ~/Recreation/client
             yarn 
-            echo "> client install"
+            echo "=========== client install ==========="
             yarn build
-            echo "> client build"
+            echo "=========== client build ==========="
             sudo systemctl restart nginx
-            echo "> serve client"
+            echo "=========== serve client ==========="
             cd ~/Recreation/server
             yarn
             yarn build
-            echo "> server install"
+            echo "=========== server install ==========="
             pm2 reload nest
-            echo "> depoly server"
+            echo "=========== depoly server ==========="
 
             
