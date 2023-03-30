@@ -33,4 +33,4 @@ jobs:
             yarn build
             echo "=========== server install ==========="
             pm2 reload nest
-            echo "=========== depoly server ==========="
+            echo "=========== deploy server ==========="
