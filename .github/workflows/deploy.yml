@@ -29,8 +29,8 @@ jobs:
             sudo systemctl restart nginx
             echo "=========== serve client ==========="
             cd ~/Recreation/server
-            yarn
-            yarn build
+            gradle build
             echo "=========== server install ==========="
-            pm2 reload nest
-            echo "=========== deploy server ==========="
+            pm2 reload spring
+            echo "=========== depoly server ==========="
+            
