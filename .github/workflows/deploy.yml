@@ -1,12 +1,12 @@
 name: test
-on: 
+on:
   push:
-    branches: ["main"]
+    branches: ['main']
 jobs:
-  build: 
+  build:
     runs-on: ubuntu-latest
     steps:
-      - name: checkout repo 
+      - name: checkout repo
         uses: actions/checkout@v2
       - name: executing remote ssh commands using password # 수행 단계 식별이름
         uses: appleboy/ssh-action@master # ssh 접속을 사용
@@ -29,10 +29,7 @@ jobs:
             sudo systemctl restart nginx
             echo "=========== serve client ==========="
             cd ~/Recreation/server
-            yarn
-            yarn build
+            gradle build
             echo "=========== server install ==========="
-            pm2 reload nest
+            pm2 reload spring
             echo "=========== depoly server ==========="
-
-            
