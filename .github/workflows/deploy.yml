@@ -1,6 +1,6 @@
 name: test
 on:
-  push:
+  pull_request:
     branches: ['main']
 jobs:
   build:
@@ -33,3 +33,4 @@ jobs:
             echo "=========== server install ==========="
             pm2 reload spring
             echo "=========== depoly server ==========="
+            
