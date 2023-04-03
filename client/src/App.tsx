@@ -1,39 +1,9 @@
-import axios from 'axios';
-import { useEffect, useState } from 'react';
-
-import Test from '@components/Test';
-
-import './App.css';
-import reactLogo from './assets/react.svg';
-import viteLogo from '/vite.svg';
+import Router from './Router';
 
 function App() {
-  const [count, setCount] = useState(0);
-
-  useEffect(() => {
-    axios.get('/api/hello').then((res) => console.log(res.data));
-  }, []);
-
   return (
     <div className="App">
-      <div>
-        <a href="https://vitejs.dev" target="_blank" rel="noreferrer">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://reactjs.org" target="_blank" rel="noreferrer">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>count is {count}</button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
-        <Test />
-      </div>
-      <p className="read-the-docs">Click on the Vite and React logos to learn more</p>
-      <img src="https://recreation-bucket.s3.ap-northeast-2.amazonaws.com/ggg.png" />
+      <Router />
     </div>
   );
 }
