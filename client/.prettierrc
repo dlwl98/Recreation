@@ -5,5 +5,17 @@
   "trailingComma": "all",
   "printWidth": 100,
   "endOfLine": "auto",
-  "formatOnSave": true
+  "formatOnSave": true,
+  "importOrder": [
+    "^@assets/(.*)$",
+    "^@constants$",
+    "^@styles/(.*)$",
+    "^@api/(.*)$",
+    "^@context/(.*)$",
+    "^@pages/(.*)$",
+    "^@components/(.*)$",
+    "^[./]"
+  ],
+  "importOrderSeparation": true,
+  "importOrderSortSpecifiers": true
 }
