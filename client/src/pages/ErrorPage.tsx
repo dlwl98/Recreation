@@ -1,5 +1,12 @@
+import Header from '@components/Header';
+
 const ErrorPage = () => {
-  return <div>Error Page</div>;
+  return (
+    <div>
+      <Header shouldDisplaySearch={true} shouldDisplayProfile={true} />
+      Error Page
+    </div>
+  );
 };
 
 export default ErrorPage;
