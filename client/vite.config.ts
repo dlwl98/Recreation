@@ -1,13 +1,44 @@
-import { defineConfig } from 'vite';
 import react from '@vitejs/plugin-react';
+import dotenv from 'dotenv';
+import { defineConfig } from 'vite';
+import svgr from 'vite-plugin-svgr';
+
+dotenv.config();
 
 // https://vitejs.dev/config/
 export default defineConfig({
-  plugins: [react()],
+  plugins: [
+    react({
+      jsxImportSource: '@emotion/react',
+      babel: {
+        plugins: [
+          [
+            '@emotion/babel-plugin',
+            {
+              autoLabel: 'dev-only',
+              labelFormat: '[dirname]--[filename]--[local]___',
+            },
+          ],
+        ],
+      },
+    }),
+    svgr(),
+  ],
+  resolve: {
+    alias: [
+      { find: '@api', replacement: '/src/api' },
+      { find: '@assets', replacement: '/src/assets' },
+      { find: '@components', replacement: '/src/components' },
+      { find: '@context', replacement: '/src/context' },
+      { find: '@pages', replacement: '/src/pages' },
+      { find: '@styles', replacement: '/src/styles' },
+      { find: '@', replacement: '/src' },
+    ],
+  },
   server: {
     proxy: {
       '/api': {
-        target: 'http://localhost:8080/',
+        target: process.env.API_URL,
       },
     },
   },
