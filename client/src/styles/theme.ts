@@ -15,6 +15,10 @@ export const theme = {
     xxxl: '40px',
   },
 
+  spacing: {
+    belowHeader: 30,
+  },
+
   logo: {
     sm: {
       width: 90,

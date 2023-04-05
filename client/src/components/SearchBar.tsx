@@ -33,7 +33,6 @@ const Outer = styled.div`
 
 const Inner = styled.div`
   margin: auto;
-  width: calc(80% - 4rem);
   height: 100%;
   display: flex;
   align-items: center;
@@ -41,9 +40,6 @@ const Inner = styled.div`
   border: 2px solid ${theme.color.gray1};
   border-radius: 5px;
   max-width: 1000px;
-  @media (max-width: 768px) {
-    width: calc(100% - 4rem);
-  }
 `;
 
 const Input = styled.input`

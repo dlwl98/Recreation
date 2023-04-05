@@ -32,6 +32,8 @@ export default defineConfig({
       { find: '@context', replacement: '/src/context' },
       { find: '@pages', replacement: '/src/pages' },
       { find: '@styles', replacement: '/src/styles' },
+      { find: '@utils', replacement: '/src/utils' },
+      { find: '@layouts', replacement: '/src/layouts' },
       { find: '@', replacement: '/src' },
     ],
   },

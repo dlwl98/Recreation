@@ -9,10 +9,12 @@
   "importOrder": [
     "^@assets/(.*)$",
     "^@constants$",
+    "^@utils/(.*)$",
     "^@styles/(.*)$",
     "^@api/(.*)$",
     "^@context/(.*)$",
     "^@pages/(.*)$",
+    "^@layouts/(.*)$",
     "^@components/(.*)$",
     "^[./]"
   ],
