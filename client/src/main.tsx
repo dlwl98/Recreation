@@ -4,13 +4,20 @@ import { BrowserRouter } from 'react-router-dom';
 
 import GlobalStyles from '@styles/GlobalStyles';
 
+import { ModalContextProvider } from '@context/ModalContext';
+import { UserContextProvider } from '@context/UserContext';
+
 import App from './App';
 
 ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
   <React.StrictMode>
-    <GlobalStyles />
-    <BrowserRouter>
-      <App />
-    </BrowserRouter>
+    <UserContextProvider>
+      <ModalContextProvider>
+        <GlobalStyles />
+        <BrowserRouter>
+          <App />
+        </BrowserRouter>
+      </ModalContextProvider>
+    </UserContextProvider>
   </React.StrictMode>,
 );

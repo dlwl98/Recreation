@@ -23,9 +23,11 @@
       "@assets/*": ["assets/*"],
       "@components/*": ["components/*"],
       "@context/*": ["context/*"],
+      "@layouts/*": ["layouts/*"],
       "@pages/*": ["pages/*"],
       "@styles/*": ["styles/*"],
       "@constants": ["constants.ts"],
+      "@utils/*": ["utils/*"],
       "@": ["./*"]
     }
   },
