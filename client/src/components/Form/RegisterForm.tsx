@@ -19,7 +19,7 @@ const RegisterForm: React.FC<Props> = ({ onSubmit }) => {
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    onSubmit(username, password);
+    onSubmit(username, password, passwordConfirm);
   };
 
   return (
