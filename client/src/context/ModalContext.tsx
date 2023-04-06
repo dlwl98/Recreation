@@ -1,13 +1,19 @@
 import { createContext, useState } from 'react';
 
+type OpenedModal = '' | 'login-modal' | 'register-modal' | 'profile-modal';
+
+export type ModalProps = {
+  closeModal: () => void;
+};
+
 export type ModalContextType = {
-  isModalOpen: string;
-  openModal: (modalName: string) => void;
+  openedModal: OpenedModal;
+  openModal: (modalName: OpenedModal) => void;
   closeModal: () => void;
 };
 
 export const ModalContext = createContext<ModalContextType>({
-  isModalOpen: '',
+  openedModal: '',
   openModal: () => {},
   closeModal: () => {},
 });
@@ -17,13 +23,13 @@ type ModalProviderProps = {
 };
 
 export const ModalContextProvider: React.FC<ModalProviderProps> = ({ children }) => {
-  const [isModalOpen, setIsModalOpen] = useState('');
+  const [openedModal, setOpenedModal] = useState<OpenedModal>('');
 
-  const openModal = (modalName: string) => setIsModalOpen(modalName);
-  const closeModal = () => setIsModalOpen('');
+  const openModal = (modalName: OpenedModal) => setOpenedModal(modalName);
+  const closeModal = () => setOpenedModal('');
 
   return (
-    <ModalContext.Provider value={{ isModalOpen, openModal, closeModal }}>
+    <ModalContext.Provider value={{ openedModal, openModal, closeModal }}>
       {children}
     </ModalContext.Provider>
   );

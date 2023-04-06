@@ -37,7 +37,7 @@ const Inner = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-between;
-  border: 2px solid ${theme.color.gray1};
+  border: 2px solid ${theme.color.gray700};
   border-radius: 5px;
   max-width: 1000px;
 `;

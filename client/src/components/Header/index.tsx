@@ -6,11 +6,10 @@ import { theme } from '@styles/theme';
 import { UserContext } from '@context/UserContext';
 
 import ContentOuter from '@components/ContentOuter';
+import LoginIcon from '@components/Header/LoginIcon';
 import LogoIcon from '@components/Header/LogoIcon';
 import ProfileIcon from '@components/Header/ProfileIcon';
 import SearchIcon from '@components/Header/SearchIcon';
-
-import LoginIcon from './LoginIcon';
 
 type Props = {
   shouldDisplaySearch: boolean;
@@ -37,7 +36,7 @@ const Header: React.FC<Props> = ({ shouldDisplaySearch, shouldDisplayProfile }) 
 
 const Outer = styled.div`
   height: 4rem;
-  border-bottom: 2px solid ${theme.color.gray0};
+  border-bottom: 2px solid ${theme.color.gray100};
 `;
 
 const Inner = styled.div`

@@ -17,13 +17,14 @@ const LoginForm: React.FC<Props> = ({ onSubmit }) => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
 
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    onSubmit(username, password);
-  };
-
   return (
-    <form css={formStyles} onSubmit={handleSubmit}>
+    <form
+      css={formStyles}
+      onSubmit={(e) => {
+        e.preventDefault();
+        onSubmit(username, password);
+      }}
+    >
       <label>아이디</label>
       <Spacing size={10} />
       <input
@@ -65,9 +66,9 @@ const formStyles = css`
 const inputStyles = css`
   padding: 5px;
   height: 25px;
-  border: 1px solid ${theme.color.gray0};
+  border: 1px solid ${theme.color.gray100};
   :focus {
-    outline: 1px solid ${theme.color.gray1};
+    outline: 1px solid ${theme.color.gray700};
   }
 `;
 
@@ -77,7 +78,7 @@ const buttons = css`
 
 const buttonStyles = css`
   padding: 10px;
-  background-color: ${theme.color.gray1};
+  background-color: ${theme.color.gray700};
   color: white;
   border: none;
   border-radius: 5px;

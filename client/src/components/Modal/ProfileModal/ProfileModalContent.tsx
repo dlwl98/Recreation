@@ -9,7 +9,7 @@ const ProfileModalContent = styled.div`
   max-height: 20rem;
   background-color: white;
   padding: 20px;
-  border: 2px solid ${theme.color.gray0};
+  border: 2px solid ${theme.color.gray100};
   border-radius: 5px;
   @media (max-width: 1024px) {
     margin-right: 1rem;
