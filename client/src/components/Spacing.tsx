@@ -1,11 +1,14 @@
 import { css } from '@emotion/react';
-import styled from '@emotion/styled';
 
-const Spacing = styled.div<{ size: number }>`
-  ${({ size }) => css`
-    flex: none;
-    height: ${size}px;
-  `}
-`;
+const Spacing = ({ size = 10 }) => {
+  return (
+    <div
+      css={css`
+        flex: none;
+        height: ${size}px;
+      `}
+    ></div>
+  );
+};
 
 export default Spacing;

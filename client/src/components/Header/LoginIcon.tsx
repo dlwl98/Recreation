@@ -6,8 +6,6 @@ import { theme } from '@styles/theme';
 import { ModalContext } from '@context/ModalContext';
 
 import ContentMargin from '@components/ContentMargin';
-import LoginModal from '@components/Modal/LoginModal';
-import RegisterModal from '@components/Modal/RegisterModal';
 
 const LoginIcon = () => {
   const { openModal } = useContext(ModalContext);
@@ -24,12 +22,11 @@ const LoginIcon = () => {
           font-weight: 600;
           max-height: 2rem;
           font-size: 1.1rem;
+          cursor: pointer;
         `}
       >
         로그인
       </div>
-      <LoginModal />
-      <RegisterModal />
     </>
   );
 };

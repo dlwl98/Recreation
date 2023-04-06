@@ -17,13 +17,14 @@ const LoginForm: React.FC<Props> = ({ onSubmit }) => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
 
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    onSubmit(username, password);
-  };
-
   return (
-    <form css={formStyles} onSubmit={handleSubmit}>
+    <form
+      css={formStyles}
+      onSubmit={(e) => {
+        e.preventDefault();
+        onSubmit(username, password);
+      }}
+    >
       <label>아이디</label>
       <Spacing size={10} />
       <input

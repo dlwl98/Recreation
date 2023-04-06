@@ -6,11 +6,10 @@ import { theme } from '@styles/theme';
 import { UserContext } from '@context/UserContext';
 
 import ContentOuter from '@components/ContentOuter';
+import LoginIcon from '@components/Header/LoginIcon';
 import LogoIcon from '@components/Header/LogoIcon';
 import ProfileIcon from '@components/Header/ProfileIcon';
 import SearchIcon from '@components/Header/SearchIcon';
-
-import LoginIcon from './LoginIcon';
 
 type Props = {
   shouldDisplaySearch: boolean;

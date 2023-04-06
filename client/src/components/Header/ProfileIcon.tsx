@@ -7,10 +7,9 @@ import { ModalContext } from '@context/ModalContext';
 
 import ContentMargin from '@components/ContentMargin';
 import Icon from '@components/Icon';
-import LoginModal from '@components/Modal/ProfileModal';
 
 const ProfileIcon = () => {
-  const { isModalOpen, openModal } = useContext(ModalContext);
+  const { openedModal, openModal } = useContext(ModalContext);
   return (
     <>
       <ContentMargin size="5px" />
@@ -22,13 +21,12 @@ const ProfileIcon = () => {
       >
         <Icon
           name="person"
-          fill={Number(!!isModalOpen)}
+          fill={Number(!!openedModal)}
           size="2.5rem"
           border={`2px solid ${theme.color.gray0}`}
           color={theme.color.gray1}
         />
       </div>
-      <LoginModal />
     </>
   );
 };

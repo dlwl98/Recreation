@@ -1,18 +1,10 @@
-import { useContext } from 'react';
-
-import { ModalContext } from '@context/ModalContext';
+import { ModalProps } from '@context/ModalContext';
 
 import LoginForm from '@components/Form/LoginForm';
 import LoginModalContent from '@components/Modal/LoginModal/LoginModalContent';
 import LoginModalOuter from '@components/Modal/LoginModal/LoginModalOuter';
 
-const LoginModal: React.FC = () => {
-  const { isModalOpen, closeModal } = useContext(ModalContext);
-
-  if (isModalOpen !== 'login-modal') {
-    return null;
-  }
-
+const LoginModal: React.FC<ModalProps> = ({ closeModal }) => {
   return (
     <LoginModalOuter onClick={closeModal}>
       <LoginModalContent onClick={(e) => e.stopPropagation()}>
