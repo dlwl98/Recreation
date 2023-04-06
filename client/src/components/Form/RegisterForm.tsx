@@ -71,9 +71,9 @@ const formStyles = css`
 const inputStyles = css`
   padding: 5px;
   height: 25px;
-  border: 1px solid ${theme.color.gray0};
+  border: 1px solid ${theme.color.gray100};
   :focus {
-    outline: 1px solid ${theme.color.gray1};
+    outline: 1px solid ${theme.color.gray700};
   }
 `;
 
@@ -83,7 +83,7 @@ const buttons = css`
 
 const buttonStyles = css`
   padding: 10px;
-  background-color: ${theme.color.gray1};
+  background-color: ${theme.color.gray700};
   color: white;
   border: none;
   border-radius: 5px;

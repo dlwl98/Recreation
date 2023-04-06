@@ -23,8 +23,8 @@ const ProfileIcon = () => {
           name="person"
           fill={Number(!!openedModal)}
           size="2.5rem"
-          border={`2px solid ${theme.color.gray0}`}
-          color={theme.color.gray1}
+          border={`2px solid ${theme.color.gray100}`}
+          color={theme.color.gray700}
         />
       </div>
     </>

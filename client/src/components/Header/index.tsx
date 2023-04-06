@@ -36,7 +36,7 @@ const Header: React.FC<Props> = ({ shouldDisplaySearch, shouldDisplayProfile }) 
 
 const Outer = styled.div`
   height: 4rem;
-  border-bottom: 2px solid ${theme.color.gray0};
+  border-bottom: 2px solid ${theme.color.gray100};
 `;
 
 const Inner = styled.div`

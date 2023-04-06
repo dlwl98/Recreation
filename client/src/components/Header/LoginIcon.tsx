@@ -15,8 +15,8 @@ const LoginIcon = () => {
       <div
         onClick={() => openModal('login-modal')}
         css={css`
-          color: ${theme.color.gray1};
-          border: 2px solid ${theme.color.gray0};
+          color: ${theme.color.gray700};
+          border: 2px solid ${theme.color.gray100};
           border-radius: 10px;
           padding: 9px;
           font-weight: 600;
