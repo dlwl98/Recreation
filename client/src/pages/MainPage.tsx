@@ -6,9 +6,10 @@ import { theme } from '@styles/theme';
 
 import MainLayout from '@layouts/MainLayout';
 
-import HelloQueryData from '@components/Data/HelloQueryData';
 import Header from '@components/Header';
-import Spacing from '@components/Spacing';
+import HelloQueryData from '@components/data/HelloQueryData';
+
+import Spacing from '@ds/Spacing';
 
 const MainPage = () => {
   return (

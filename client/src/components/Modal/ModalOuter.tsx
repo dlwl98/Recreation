@@ -1,6 +1,6 @@
 import { css, cx } from '@emotion/css';
 
-import Flex from '@components/Flex';
+import Flex from '@ds/Flex';
 
 type Props = {
   onClick: () => void;

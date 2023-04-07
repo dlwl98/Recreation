@@ -5,7 +5,7 @@ import { theme } from '@styles/theme';
 
 import { ModalContext } from '@context/ModalContext';
 
-import ContentMargin from '@components/ContentMargin';
+import ContentMargin from '@ds/ContentMargin';
 
 const LoginIcon = () => {
   const { openModal } = useContext(ModalContext);

@@ -5,12 +5,12 @@ import { theme } from '@styles/theme';
 
 import { UserContext } from '@context/UserContext';
 
-import ContentOuter from '@components/ContentOuter';
-import Flex from '@components/Flex';
 import LoginIcon from '@components/Header/LoginIcon';
 import LogoIcon from '@components/Header/LogoIcon';
 import ProfileIcon from '@components/Header/ProfileIcon';
 import SearchIcon from '@components/Header/SearchIcon';
+
+import Flex from '@ds/Flex';
 
 type Props = {
   shouldDisplaySearch: boolean;
@@ -22,14 +22,14 @@ const Header: React.FC<Props> = ({ shouldDisplaySearch, shouldDisplayProfile }) 
   return (
     <div className={outer}>
       <Flex align="center" justify="space-between" className={inner}>
-        <ContentOuter>
+        <Flex>
           <LogoIcon />
-        </ContentOuter>
+        </Flex>
 
-        <ContentOuter>
+        <Flex>
           {shouldDisplaySearch ? <SearchIcon /> : <></>}
           {shouldDisplayProfile ? isLoggedIn ? <ProfileIcon /> : <LoginIcon /> : <></>}
-        </ContentOuter>
+        </Flex>
       </Flex>
     </div>
   );

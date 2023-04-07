@@ -3,9 +3,9 @@ import { Outlet } from 'react-router-dom';
 
 import { ModalContext, ModalProps } from '@context/ModalContext';
 
-import LoginModal from '@components/Modal/LoginModal';
-import ProfileModal from '@components/Modal/ProfileModal';
-import RegisterModal from '@components/Modal/RegisterModal';
+import LoginModal from '@components/modal/LoginModal';
+import ProfileModal from '@components/modal/ProfileModal';
+import RegisterModal from '@components/modal/RegisterModal';
 
 const ModalRoute = () => {
   const { openedModal, closeModal } = useContext(ModalContext);

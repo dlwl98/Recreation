@@ -5,8 +5,10 @@ import { theme } from '@styles/theme';
 
 import { ModalContext } from '@context/ModalContext';
 
-import ContentMargin from '@components/ContentMargin';
-import Spacing from '@components/Spacing';
+import ContentMargin from '@ds/ContentMargin';
+import Flex from '@ds/Flex';
+import Input from '@ds/Input';
+import Spacing from '@ds/Spacing';
 
 type Props = {
   onSubmit: (username: string, password: string) => void;
@@ -18,8 +20,9 @@ const LoginForm: React.FC<Props> = ({ onSubmit }) => {
   const [password, setPassword] = useState('');
 
   return (
-    <form
-      className={formStyles}
+    <Flex<'form'>
+      as="form"
+      direction="column"
       onSubmit={(e) => {
         e.preventDefault();
         onSubmit(username, password);
@@ -27,21 +30,12 @@ const LoginForm: React.FC<Props> = ({ onSubmit }) => {
     >
       <label>아이디</label>
       <Spacing size={10} />
-      <input
-        className={inputStyles}
-        type="text"
-        value={username}
-        onChange={(e) => setUsername(e.target.value)}
-      />
+      <Input type="text" value={username} onChange={(e) => setUsername(e.target.value)} />
+
       <Spacing size={10} />
       <label>비밀번호</label>
       <Spacing size={10} />
-      <input
-        className={inputStyles}
-        type="password"
-        value={password}
-        onChange={(e) => setPassword(e.target.value)}
-      />
+      <Input type="password" value={password} onChange={(e) => setPassword(e.target.value)} />
 
       <Spacing size={20} />
       <div className={buttons}>
@@ -54,23 +48,9 @@ const LoginForm: React.FC<Props> = ({ onSubmit }) => {
           </button>
         </ContentMargin>
       </div>
-    </form>
+    </Flex>
   );
 };
-
-const formStyles = css`
-  display: flex;
-  flex-direction: column;
-`;
-
-const inputStyles = css`
-  padding: 5px;
-  height: 25px;
-  border: 1px solid ${theme.color.gray100};
-  :focus {
-    outline: 1px solid ${theme.color.gray700};
-  }
-`;
 
 const buttons = css`
   margin: auto;

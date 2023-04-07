@@ -28,6 +28,7 @@
       "@styles/*": ["styles/*"],
       "@constants": ["constants.ts"],
       "@utils/*": ["utils/*"],
+      "@ds/*": ["_ds/*"],
       "@": ["./*"]
     }
   },

@@ -1,8 +1,8 @@
 import { ModalProps } from '@context/ModalContext';
 
-import RegisterForm from '@components/Form/RegisterForm';
-import LoginModalContent from '@components/Modal/LoginModal/LoginModalContent';
-import LoginModalOuter from '@components/Modal/LoginModal/LoginModalOuter';
+import RegisterForm from '@components/form/RegisterForm';
+import LoginModalContent from '@components/modal/LoginModal/LoginModalContent';
+import LoginModalOuter from '@components/modal/LoginModal/LoginModalOuter';
 
 const RegisterModal: React.FC<ModalProps> = ({ closeModal }) => {
   return (

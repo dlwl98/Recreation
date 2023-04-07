@@ -2,8 +2,9 @@ import { Link } from 'react-router-dom';
 
 import { theme } from '@styles/theme';
 
-import ContentMargin from '@components/ContentMargin';
 import Icon from '@components/Icon';
+
+import ContentMargin from '@ds/ContentMargin';
 
 const SearchIcon = () => {
   return (

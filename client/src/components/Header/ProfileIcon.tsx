@@ -5,8 +5,9 @@ import { theme } from '@styles/theme';
 
 import { ModalContext } from '@context/ModalContext';
 
-import ContentMargin from '@components/ContentMargin';
 import Icon from '@components/Icon';
+
+import ContentMargin from '@ds/ContentMargin';
 
 const ProfileIcon = () => {
   const { openedModal, openModal } = useContext(ModalContext);

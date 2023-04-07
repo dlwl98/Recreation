@@ -16,6 +16,7 @@
     "^@pages/(.*)$",
     "^@layouts/(.*)$",
     "^@components/(.*)$",
+    "^@ds/(.*)$",
     "^[./]"
   ],
   "importOrderSeparation": true,

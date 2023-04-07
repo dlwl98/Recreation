@@ -2,24 +2,23 @@ import { css } from '@emotion/css';
 
 import { theme } from '@styles/theme';
 
-import ContentMargin from '@components/ContentMargin';
-import ContentOuter from '@components/ContentOuter';
-import Flex from '@components/Flex';
 import Icon from '@components/Icon';
+
+import ContentMargin from '@ds/ContentMargin';
+import Flex from '@ds/Flex';
+import Input from '@ds/Input';
 
 const SearchBar = () => {
   return (
     <div className={outer}>
       <Flex align="center" justify="space-between" className={inner}>
-        <ContentOuter width="100%">
-          <ContentMargin size="5px" />
-          <input className={input} />
+        <ContentMargin size="5px" />
+        <Input className={input} />
 
-          <ContentMargin size="5px" />
-          <Icon name="search" fill={0} size="2.2rem" color={theme.color.black} />
+        <ContentMargin size="5px" />
+        <Icon name="search" fill={0} size="2.2rem" color={theme.color.black} />
 
-          <ContentMargin size="5px" />
-        </ContentOuter>
+        <ContentMargin size="5px" />
       </Flex>
     </div>
   );
@@ -41,12 +40,14 @@ const inner = css`
 `;
 
 const input = css`
-  all: unset;
   width: 100%;
-  height: 2rem;
+  border: none;
+  :focus {
+    border: none;
+  }
   font-size: ${theme.fontSize.lg};
   @media (max-width: 768px) {
-    height: 1.7rem;
+    height: 1.2rem;
     font-size: ${theme.fontSize.md};
   }
 `;
