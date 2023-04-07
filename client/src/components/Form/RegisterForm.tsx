@@ -1,4 +1,4 @@
-import { css } from '@emotion/react';
+import { css } from '@emotion/css';
 import { useContext, useState } from 'react';
 
 import { theme } from '@styles/theme';
@@ -8,7 +8,7 @@ import { ModalContext } from '@context/ModalContext';
 import Spacing from '@components/Spacing';
 
 type Props = {
-  onSubmit: (username: string, password: string) => void;
+  onSubmit: (username: string, password: string, passwordConfirm: string) => void;
 };
 
 const RegisterForm: React.FC<Props> = ({ onSubmit }) => {
@@ -23,11 +23,11 @@ const RegisterForm: React.FC<Props> = ({ onSubmit }) => {
   };
 
   return (
-    <form css={formStyles} onSubmit={handleSubmit}>
+    <form className={formStyles} onSubmit={handleSubmit}>
       <label>아이디</label>
       <Spacing size={10} />
       <input
-        css={inputStyles}
+        className={inputStyles}
         type="text"
         value={username}
         onChange={(e) => setUsername(e.target.value)}
@@ -37,7 +37,7 @@ const RegisterForm: React.FC<Props> = ({ onSubmit }) => {
       <label>비밀번호</label>
       <Spacing size={10} />
       <input
-        css={inputStyles}
+        className={inputStyles}
         type="password"
         value={password}
         onChange={(e) => setPassword(e.target.value)}
@@ -47,15 +47,15 @@ const RegisterForm: React.FC<Props> = ({ onSubmit }) => {
       <label>비밀번호 확인</label>
       <Spacing size={10} />
       <input
-        css={inputStyles}
+        className={inputStyles}
         type="password"
         value={passwordConfirm}
         onChange={(e) => setPasswordConfirm(e.target.value)}
       />
 
       <Spacing size={20} />
-      <div css={buttons}>
-        <button css={buttonStyles} type="submit">
+      <div className={buttons}>
+        <button className={buttonStyles} type="submit">
           회원가입
         </button>
       </div>

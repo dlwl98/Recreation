@@ -1,4 +1,4 @@
-import { css } from '@emotion/react';
+import { css } from '@emotion/css';
 import { useContext } from 'react';
 
 import { theme } from '@styles/theme';
@@ -14,7 +14,7 @@ const ProfileIcon = () => {
     <>
       <ContentMargin size="5px" />
       <div
-        css={css`
+        className={css`
           cursor: pointer;
         `}
         onClick={() => openModal('profile-modal')}

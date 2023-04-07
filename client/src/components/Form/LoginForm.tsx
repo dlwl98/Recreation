@@ -1,4 +1,4 @@
-import { css } from '@emotion/react';
+import { css } from '@emotion/css';
 import { useContext, useState } from 'react';
 
 import { theme } from '@styles/theme';
@@ -19,7 +19,7 @@ const LoginForm: React.FC<Props> = ({ onSubmit }) => {
 
   return (
     <form
-      css={formStyles}
+      className={formStyles}
       onSubmit={(e) => {
         e.preventDefault();
         onSubmit(username, password);
@@ -28,7 +28,7 @@ const LoginForm: React.FC<Props> = ({ onSubmit }) => {
       <label>아이디</label>
       <Spacing size={10} />
       <input
-        css={inputStyles}
+        className={inputStyles}
         type="text"
         value={username}
         onChange={(e) => setUsername(e.target.value)}
@@ -37,19 +37,19 @@ const LoginForm: React.FC<Props> = ({ onSubmit }) => {
       <label>비밀번호</label>
       <Spacing size={10} />
       <input
-        css={inputStyles}
+        className={inputStyles}
         type="password"
         value={password}
         onChange={(e) => setPassword(e.target.value)}
       />
 
       <Spacing size={20} />
-      <div css={buttons}>
-        <button css={buttonStyles} type="submit">
+      <div className={buttons}>
+        <button className={buttonStyles} type="submit">
           로그인
         </button>
         <ContentMargin size="20px">
-          <button css={buttonStyles} onClick={() => openModal('register-modal')}>
+          <button className={buttonStyles} onClick={() => openModal('register-modal')}>
             가입하기
           </button>
         </ContentMargin>

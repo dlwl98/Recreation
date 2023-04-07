@@ -1,9 +1,9 @@
-import { css } from '@emotion/react';
+import { css } from '@emotion/css';
 
 const Spacing = ({ size = 10 }) => {
   return (
     <div
-      css={css`
+      className={css`
         flex: none;
         height: ${size}px;
       `}
