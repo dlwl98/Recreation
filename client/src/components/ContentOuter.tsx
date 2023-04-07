@@ -1,5 +1,6 @@
-import { css } from '@emotion/react';
-import styled from '@emotion/styled';
+import { css } from '@emotion/css';
+
+import Flex from '@components/Flex';
 
 type Props = {
   width?: string;
@@ -7,16 +8,15 @@ type Props = {
 };
 
 const ContentOuter: React.FC<Props> = ({ width = 'auto', children }) => {
-  return <Outer width={width}>{children}</Outer>;
+  return (
+    <Flex
+      className={css`
+        width: ${width};
+      `}
+    >
+      {children}
+    </Flex>
+  );
 };
-
-const Outer = styled.div<Props>`
-  ${({ width }) => css`
-    width: ${width};
-    display: flex;
-    align-items: center;
-    position: relative;
-  `}
-`;
 
 export default ContentOuter;

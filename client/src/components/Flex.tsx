@@ -3,24 +3,25 @@ import { css, cx } from '@emotion/css';
 import defualtFlexStyles from '@styles/DefaultFlexStyles';
 
 type Props = {
-  onClick: () => void;
+  align?: string;
+  justify?: string;
   className?: string;
   children: React.ReactNode;
 };
 
-const ModalOuter: React.FC<Props> = ({ onClick, className, children }) => {
+const Flex: React.FC<Props> = ({
+  align = 'flex-start',
+  justify = 'flex-start',
+  className,
+  children,
+}) => {
   return (
     <div
-      onClick={onClick}
       className={cx(
         defualtFlexStyles,
         css`
-          z-index: 1;
-          position: fixed;
-          top: 0;
-          left: 0;
-          width: 100%;
-          height: 100%;
+          align-items: ${align};
+          justify-content: ${justify};
         `,
         className,
       )}
@@ -29,4 +30,4 @@ const ModalOuter: React.FC<Props> = ({ onClick, className, children }) => {
     </div>
   );
 };
-export default ModalOuter;
+export default Flex;
