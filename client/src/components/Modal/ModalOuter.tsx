@@ -1,6 +1,6 @@
 import { css, cx } from '@emotion/css';
 
-import defualtFlexStyles from '@styles/DefaultFlexStyles';
+import Flex from '@components/Flex';
 
 type Props = {
   onClick: () => void;
@@ -10,10 +10,9 @@ type Props = {
 
 const ModalOuter: React.FC<Props> = ({ onClick, className, children }) => {
   return (
-    <div
+    <Flex
       onClick={onClick}
       className={cx(
-        defualtFlexStyles,
         css`
           z-index: 1;
           position: fixed;
@@ -26,7 +25,7 @@ const ModalOuter: React.FC<Props> = ({ onClick, className, children }) => {
       )}
     >
       {children}
-    </div>
+    </Flex>
   );
 };
 export default ModalOuter;

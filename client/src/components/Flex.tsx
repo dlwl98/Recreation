@@ -1,6 +1,5 @@
 import { css, cx } from '@emotion/css';
-
-import defualtFlexStyles from '@styles/DefaultFlexStyles';
+import { ComponentProps } from 'react';
 
 type Props = {
   align?: string;
@@ -9,22 +8,24 @@ type Props = {
   children: React.ReactNode;
 };
 
-const Flex: React.FC<Props> = ({
+const Flex: React.FC<Props & ComponentProps<'div'>> = ({
   align = 'flex-start',
   justify = 'flex-start',
   className,
   children,
+  ...props
 }) => {
   return (
     <div
       className={cx(
-        defualtFlexStyles,
         css`
+          display: flex;
           align-items: ${align};
           justify-content: ${justify};
         `,
         className,
       )}
+      {...props}
     >
       {children}
     </div>
