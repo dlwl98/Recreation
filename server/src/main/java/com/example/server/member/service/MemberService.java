@@ -10,11 +10,7 @@ public class MemberService {
     @Autowired
     private MemberRepository memberRepository;
 
-    public void signUp(Member member) {
-        if (memberRepository.findByUsername(member.getUsername()).isPresent()) {
-            throw new IllegalStateException("이미 존재하는 회원입니다.");
-        }
-
-        memberRepository.save(member);
+    public Member save(Member member) {
+        return memberRepository.save(member);
     }
 }
