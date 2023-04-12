@@ -1,6 +1,7 @@
 import { createContext, useState } from 'react';
 
 import { PostLoginResponse } from '@api/postLogin';
+import { postRefresh } from '@api/postRefresh';
 
 import { useReactCookie } from '@hooks/useReactCookie';
 
@@ -54,6 +55,15 @@ export const UserContextProvider: React.FC<UserProviderProps> = ({ children }) =
     setAccessToken(accessToken);
     setExpireAt(new Date().getTime() + 24 * 60 * 60 * 1000);
   };
+
+  const refresh = (async () => {
+    try {
+      const { accessToken: newAccessToken } = await postRefresh();
+      setNewAccessToken(newAccessToken);
+    } catch (error) {
+      logout();
+    }
+  })();
 
   return (
     <UserContext.Provider
