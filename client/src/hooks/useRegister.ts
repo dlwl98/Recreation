@@ -4,7 +4,7 @@ import { toast } from 'react-hot-toast';
 
 import { isEmailFormat, isPasswordFormat } from '@utils/index';
 
-import { RegisterValidateError } from '@custom-types/error';
+import { ErrorWithMessage } from '@custom-types/error';
 
 import { useRegisterMutation } from './useRegisterMutation';
 
@@ -23,15 +23,18 @@ export default function useRegister() {
   };
 
   const isValidateInputs = () => {
-    const { email, password, passwordConfirm } = inputs;
+    const { username, email, password, passwordConfirm } = inputs;
+    if (username === '' || email === '' || password === '') {
+      throw new ErrorWithMessage('모든 항목은 필수 입력란 입니다');
+    }
     if (password !== passwordConfirm) {
-      throw new RegisterValidateError('비밀번호가 일치하지 않습니다');
+      throw new ErrorWithMessage('비밀번호가 일치하지 않습니다');
     }
     if (!isEmailFormat(email)) {
-      throw new RegisterValidateError('이메일이 형식에 맞지 않습니다');
+      throw new ErrorWithMessage('이메일이 형식에 맞지 않습니다');
     }
     if (!isPasswordFormat(password)) {
-      throw new RegisterValidateError('비밀번호가 형식에 맞지 않습니다');
+      throw new ErrorWithMessage('비밀번호가 형식에 맞지 않습니다');
     }
     return true;
   };
@@ -44,7 +47,7 @@ export default function useRegister() {
         registerMutate({ username, email, password });
       }
     } catch (e) {
-      if (e instanceof RegisterValidateError) {
+      if (e instanceof ErrorWithMessage) {
         toast.error(e.message);
       }
     }
