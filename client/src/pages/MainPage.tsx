@@ -17,11 +17,11 @@ const MainPage = () => {
       <Header shouldDisplaySearch={true} shouldDisplayProfile={true} />
       <Spacing size={theme.spacing.belowHeader} />
       <MainLayout>
-        <ErrorBoundary fallback={<div>error</div>}>
+        {/* <ErrorBoundary fallback={<div>error</div>}>
           <Suspense fallback={<div>loading</div>}>
             <HelloQueryData />
           </Suspense>
-        </ErrorBoundary>
+        </ErrorBoundary> */}
       </MainLayout>
     </div>
   );

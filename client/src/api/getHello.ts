@@ -3,13 +3,17 @@ import { useQuery } from 'react-query';
 
 import axiosInstance from '@api/axiosInstance';
 
+type Res = {
+  imkey: String;
+};
+
 export const getHello = async () => {
-  const response = await axiosInstance.get<string>('/hello');
+  const response = await axiosInstance.get<Res>('/hello');
   return response.data;
 };
 
 export const useHelloQuery = ({ param }: { param: string }) =>
-  useQuery<string, AxiosError>(
+  useQuery<Res, AxiosError>(
     ['get-hello', param],
     () => {
       console.log(param);
