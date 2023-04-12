@@ -1,9 +1,23 @@
 import axiosInstance from '@api/axiosInstance';
-import { LoginFormData, PostLoginResponse } from '@api/postLogin';
 
-export const postRegister = async ({ username, password }: LoginFormData) => {
-  const response = await axiosInstance.post<PostLoginResponse>('/register', {
+export type RegisterFormData = {
+  username: string;
+  email: string;
+  password: string;
+};
+
+export type PostRegisterResponse = {
+  username: string;
+  tokens: {
+    access_token: string;
+    refresh_token: string;
+  };
+};
+
+export const postRegister = async ({ username, email, password }: RegisterFormData) => {
+  const response = await axiosInstance.post<PostRegisterResponse>('/register', {
     username,
+    email,
     password,
   });
   return response.data;
