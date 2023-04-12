@@ -1,45 +1,46 @@
 import { css } from '@emotion/css';
-import { useState } from 'react';
 
 import { theme } from '@styles/theme';
+
+import useRegister from '@hooks/useRegister';
 
 import Flex from '@ds/Flex';
 import Input from '@ds/Input';
 import Spacing from '@ds/Spacing';
 
-type Props = {
-  onSubmit: (username: string, password: string, passwordConfirm: string) => void;
-};
-
-const RegisterForm: React.FC<Props> = ({ onSubmit }) => {
-  const [username, setUsername] = useState('');
-  const [password, setPassword] = useState('');
-  const [passwordConfirm, setPasswordConfirm] = useState('');
-
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    onSubmit(username, password, passwordConfirm);
-  };
+const RegisterForm: React.FC = () => {
+  const {
+    inputs: { username, email, password, passwordConfirm },
+    onChange,
+    onSubmit,
+  } = useRegister();
 
   return (
-    <Flex<'form'> as="form" direction="column" onSubmit={handleSubmit}>
-      <label>아이디</label>
+    <Flex<'form'> as="form" direction="column" onSubmit={onSubmit}>
+      <label>닉네임</label>
       <Spacing size={10} />
-      <Input type="text" value={username} onChange={(e) => setUsername(e.target.value)} />
+      <Input type="text" name="username" value={username} onChange={onChange} />
+
+      <Spacing size={10} />
+      <label>이메일</label>
+      <Spacing size={10} />
+      <Input type="text" name="email" value={email} onChange={onChange} />
 
       <Spacing size={10} />
       <label>비밀번호</label>
       <Spacing size={10} />
-      <Input type="password" value={password} onChange={(e) => setPassword(e.target.value)} />
+      <Input
+        type="password"
+        name="password"
+        value={password}
+        placeholder="8~16자 영어, 숫자 필수"
+        onChange={onChange}
+      />
 
       <Spacing size={10} />
       <label>비밀번호 확인</label>
       <Spacing size={10} />
-      <Input
-        type="password"
-        value={passwordConfirm}
-        onChange={(e) => setPasswordConfirm(e.target.value)}
-      />
+      <Input type="password" name="passwordConfirm" value={passwordConfirm} onChange={onChange} />
 
       <Spacing size={20} />
       <div className={buttons}>
