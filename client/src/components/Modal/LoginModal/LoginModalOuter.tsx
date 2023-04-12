@@ -1,4 +1,4 @@
-import { css } from '@emotion/react';
+import { css } from '@emotion/css';
 
 import ModalOuter from '../ModalOuter';
 
@@ -11,7 +11,7 @@ const LoginModalOuter: React.FC<Props> = ({ onClick, children }) => {
   return (
     <ModalOuter
       onClick={onClick}
-      css={css`
+      className={css`
         background-color: rgba(0, 0, 0, 0.5);
         justify-content: center;
         align-items: center;

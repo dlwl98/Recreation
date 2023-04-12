@@ -3,7 +3,8 @@ import { theme } from '@styles/theme';
 import MainLayout from '@layouts/MainLayout';
 
 import Header from '@components/Header';
-import Spacing from '@components/Spacing';
+
+import Spacing from '@ds/Spacing';
 
 const ErrorPage = () => {
   return (

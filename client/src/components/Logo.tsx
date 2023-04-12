@@ -1,4 +1,4 @@
-import { css } from '@emotion/react';
+import { css, cx } from '@emotion/css';
 
 import { ReactComponent as Svg } from '@assets/logo.svg';
 
@@ -6,15 +6,24 @@ type Props = {
   width: number;
   height: number;
   color: string;
+  className?: string;
 };
 
-const Logo: React.FC<Props> = ({ width, height, color }) => {
-  const style = css`
-    g {
-      fill: ${color};
-    }
-  `;
-  return <Svg width={width} height={height} css={style}></Svg>;
+const Logo: React.FC<Props> = ({ width, height, color, className }) => {
+  return (
+    <Svg
+      width={width}
+      height={height}
+      className={cx(
+        css`
+          g {
+            fill: ${color};
+          }
+        `,
+        className,
+      )}
+    ></Svg>
+  );
 };
 
 export default Logo;

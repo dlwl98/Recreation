@@ -4,7 +4,8 @@ import MainLayout from '@layouts/MainLayout';
 
 import Header from '@components/Header';
 import SearchBar from '@components/SearchBar';
-import Spacing from '@components/Spacing';
+
+import Spacing from '@ds/Spacing';
 
 const SearchPage = () => {
   return (

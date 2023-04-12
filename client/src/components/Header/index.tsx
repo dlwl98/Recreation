@@ -1,15 +1,16 @@
-import styled from '@emotion/styled';
+import { css } from '@emotion/css';
 import { useContext } from 'react';
 
 import { theme } from '@styles/theme';
 
 import { UserContext } from '@context/UserContext';
 
-import ContentOuter from '@components/ContentOuter';
 import LoginIcon from '@components/Header/LoginIcon';
 import LogoIcon from '@components/Header/LogoIcon';
 import ProfileIcon from '@components/Header/ProfileIcon';
 import SearchIcon from '@components/Header/SearchIcon';
+
+import Flex from '@ds/Flex';
 
 type Props = {
   shouldDisplaySearch: boolean;
@@ -19,33 +20,30 @@ type Props = {
 const Header: React.FC<Props> = ({ shouldDisplaySearch, shouldDisplayProfile }) => {
   const { isLoggedIn } = useContext(UserContext);
   return (
-    <Outer>
-      <Inner>
-        <ContentOuter>
+    <div className={outer}>
+      <Flex align="center" justify="space-between" className={inner}>
+        <Flex>
           <LogoIcon />
-        </ContentOuter>
+        </Flex>
 
-        <ContentOuter>
+        <Flex>
           {shouldDisplaySearch ? <SearchIcon /> : <></>}
           {shouldDisplayProfile ? isLoggedIn ? <ProfileIcon /> : <LoginIcon /> : <></>}
-        </ContentOuter>
-      </Inner>
-    </Outer>
+        </Flex>
+      </Flex>
+    </div>
   );
 };
 
-const Outer = styled.div`
+const outer = css`
   height: 4rem;
   border-bottom: 2px solid ${theme.color.gray100};
 `;
 
-const Inner = styled.div`
+const inner = css`
   margin: auto;
   width: calc(90% - 2rem);
   height: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
   @media (max-width: 1024px) {
     width: calc(100% - 2rem);
   }

@@ -12,6 +12,7 @@ const Router = () => {
       <Route element={<ModalRoute />}>
         <Route path="/" element={<MainPage />} />
         <Route path="/search" element={<SearchPage />} />
+        <Route path="/error" element={<ErrorPage />} />
         <Route path="*" element={<ErrorPage />} />
       </Route>
     </Routes>

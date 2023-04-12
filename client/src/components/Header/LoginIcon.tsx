@@ -1,11 +1,11 @@
-import { css } from '@emotion/react';
+import { css } from '@emotion/css';
 import { useContext } from 'react';
 
 import { theme } from '@styles/theme';
 
 import { ModalContext } from '@context/ModalContext';
 
-import ContentMargin from '@components/ContentMargin';
+import ContentMargin from '@ds/ContentMargin';
 
 const LoginIcon = () => {
   const { openModal } = useContext(ModalContext);
@@ -14,7 +14,7 @@ const LoginIcon = () => {
       <ContentMargin size="5px" />
       <div
         onClick={() => openModal('login-modal')}
-        css={css`
+        className={css`
           color: ${theme.color.gray700};
           border: 2px solid ${theme.color.gray100};
           border-radius: 10px;

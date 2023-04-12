@@ -1,76 +1,46 @@
-import { css } from '@emotion/react';
-import { useContext, useState } from 'react';
+import { css } from '@emotion/css';
+import { useContext } from 'react';
 
 import { theme } from '@styles/theme';
 
+import useLogin from '@hooks/useLogin';
+
 import { ModalContext } from '@context/ModalContext';
 
-import ContentMargin from '@components/ContentMargin';
-import Spacing from '@components/Spacing';
+import ContentMargin from '@ds/ContentMargin';
+import Flex from '@ds/Flex';
+import Input from '@ds/Input';
+import Spacing from '@ds/Spacing';
 
-type Props = {
-  onSubmit: (username: string, password: string) => void;
-};
-
-const LoginForm: React.FC<Props> = ({ onSubmit }) => {
+const LoginForm: React.FC = () => {
+  const { email, setEmail, password, setPassword, onSubmit } = useLogin();
   const { openModal } = useContext(ModalContext);
-  const [username, setUsername] = useState('');
-  const [password, setPassword] = useState('');
 
   return (
-    <form
-      css={formStyles}
-      onSubmit={(e) => {
-        e.preventDefault();
-        onSubmit(username, password);
-      }}
-    >
-      <label>아이디</label>
+    <Flex<'form'> as="form" direction="column" onSubmit={onSubmit}>
+      <label>이메일</label>
       <Spacing size={10} />
-      <input
-        css={inputStyles}
-        type="text"
-        value={username}
-        onChange={(e) => setUsername(e.target.value)}
-      />
+      <Input type="text" value={email} onChange={(e) => setEmail(e.target.value)} />
+
       <Spacing size={10} />
       <label>비밀번호</label>
       <Spacing size={10} />
-      <input
-        css={inputStyles}
-        type="password"
-        value={password}
-        onChange={(e) => setPassword(e.target.value)}
-      />
+      <Input type="password" value={password} onChange={(e) => setPassword(e.target.value)} />
 
       <Spacing size={20} />
-      <div css={buttons}>
-        <button css={buttonStyles} type="submit">
+      <div className={buttons}>
+        <button className={buttonStyles} type="submit">
           로그인
         </button>
         <ContentMargin size="20px">
-          <button css={buttonStyles} onClick={() => openModal('register-modal')}>
+          <button className={buttonStyles} onClick={() => openModal('register-modal')}>
             가입하기
           </button>
         </ContentMargin>
       </div>
-    </form>
+    </Flex>
   );
 };
-
-const formStyles = css`
-  display: flex;
-  flex-direction: column;
-`;
-
-const inputStyles = css`
-  padding: 5px;
-  height: 25px;
-  border: 1px solid ${theme.color.gray100};
-  :focus {
-    outline: 1px solid ${theme.color.gray700};
-  }
-`;
 
 const buttons = css`
   margin: auto;
