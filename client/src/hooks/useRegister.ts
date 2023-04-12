@@ -1,15 +1,21 @@
 import Cookies from 'js-cookie';
 import { useState } from 'react';
+import { useContext } from 'react';
 import { toast } from 'react-hot-toast';
+import { useNavigate } from 'react-router-dom';
 
 import { isEmailFormat, isPasswordFormat } from '@utils/index';
 
 import { ErrorWithMessage } from '@custom-types/error';
 
+import { ModalContext } from '@context/ModalContext';
+
 import { useRegisterMutation } from './useRegisterMutation';
 
 export default function useRegister() {
-  const { data, mutate: registerMutate } = useRegisterMutation();
+  const nevigate = useNavigate();
+  const { closeModal } = useContext(ModalContext);
+  const { mutate: registerMutate } = useRegisterMutation();
 
   const [inputs, setInputs] = useState({
     username: '',
@@ -44,7 +50,18 @@ export default function useRegister() {
     const { username, email, password } = inputs;
     try {
       if (isValidateInputs()) {
-        registerMutate({ username, email, password });
+        registerMutate(
+          { username, email, password },
+          {
+            onSuccess: (data) => {
+              localStorage.setItem('accessToken', data.tokens.access_token);
+              Cookies.set('refreshToken', data.tokens.refresh_token, { expires: 30 });
+              toast.success('회원가입이 완료되었습니다');
+              closeModal();
+              nevigate('/');
+            },
+          },
+        );
       }
     } catch (e) {
       if (e instanceof ErrorWithMessage) {

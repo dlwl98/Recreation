@@ -1,5 +1,8 @@
+import Cookies from 'js-cookie';
 import { useState } from 'react';
+import { useContext } from 'react';
 import { toast } from 'react-hot-toast';
+import { useNavigate } from 'react-router-dom';
 
 import { isEmailFormat, isPasswordFormat } from '@utils/index';
 
@@ -7,7 +10,11 @@ import { ErrorWithMessage } from '@custom-types/error';
 
 import { useLoginMutation } from '@hooks/useLoginMutation';
 
+import { ModalContext } from '@context/ModalContext';
+
 export default function useLogin() {
+  const nevigate = useNavigate();
+  const { closeModal } = useContext(ModalContext);
   const { mutate: loginMutate } = useLoginMutation();
 
   const [email, setEmail] = useState('');
@@ -30,7 +37,18 @@ export default function useLogin() {
     e.preventDefault();
     try {
       if (isValidateInputs()) {
-        loginMutate({ email, password });
+        loginMutate(
+          { email, password },
+          {
+            onSuccess: (data) => {
+              localStorage.setItem('accessToken', data.tokens.access_token);
+              Cookies.set('refreshToken', data.tokens.refresh_token, { expires: 30 });
+              toast.success('로그인이 완료되었습니다');
+              closeModal();
+              nevigate('/');
+            },
+          },
+        );
       }
     } catch (e) {
       if (e instanceof ErrorWithMessage) {
