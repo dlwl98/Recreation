@@ -19,7 +19,6 @@ export default function useRegister() {
   const { closeModal } = useContext(ModalContext);
   const { login } = useContext(UserContext);
   const { mutate: registerMutate } = useRegisterMutation();
-  const { setCookie } = useReactCookie();
 
   const [inputs, setInputs] = useState({
     username: '',
@@ -59,10 +58,6 @@ export default function useRegister() {
           {
             onSuccess: (data) => {
               login(data);
-              setCookie('refreshToken', data.tokens.refreshToken, {
-                expires: new Date(Date.now() + 30 * 24 * 60 * 60 * 1000),
-                httpOnly: true,
-              });
               toast.success('회원가입이 완료되었습니다');
               closeModal();
               nevigate('/');

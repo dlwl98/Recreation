@@ -18,7 +18,6 @@ export default function useLogin() {
   const { closeModal } = useContext(ModalContext);
   const { login } = useContext(UserContext);
   const { mutate: loginMutate } = useLoginMutation();
-  const { setCookie } = useReactCookie();
 
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -45,10 +44,6 @@ export default function useLogin() {
           {
             onSuccess: (data) => {
               login(data);
-              setCookie('refreshToken', data.tokens.refreshToken, {
-                expires: new Date(Date.now() + 30 * 24 * 60 * 60 * 1000),
-                httpOnly: true,
-              });
               toast.success('로그인이 완료되었습니다');
               closeModal();
               nevigate('/');

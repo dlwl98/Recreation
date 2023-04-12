@@ -34,13 +34,17 @@ export const UserContextProvider: React.FC<UserProviderProps> = ({ children }) =
   const [username, setUsername] = useState('');
   const [accessToken, setAccessToken] = useState('');
   const [expireAt, setExpireAt] = useState<number>(0);
-  const { removeCookie } = useReactCookie();
+  const { setCookie, removeCookie } = useReactCookie();
 
   const login = (res: PostLoginResponse) => {
     setIsLoggedIn(true);
     setUsername(res.username);
     setAccessToken(res.tokens.accessToken);
     setExpireAt(new Date().getTime() + 24 * 60 * 60 * 1000);
+    setCookie('refreshToken', res.tokens.refreshToken, {
+      expires: new Date(Date.now() + 7 * 24 * 60 * 60 * 1000),
+      httpOnly: true,
+    });
   };
 
   const logout = () => {
@@ -56,14 +60,11 @@ export const UserContextProvider: React.FC<UserProviderProps> = ({ children }) =
     setExpireAt(new Date().getTime() + 24 * 60 * 60 * 1000);
   };
 
-  const refresh = (async () => {
-    try {
-      const { accessToken: newAccessToken } = await postRefresh();
-      setNewAccessToken(newAccessToken);
-    } catch (error) {
-      logout();
-    }
-  })();
+  if (!isLoggedIn) {
+    postRefresh()
+      .then((data) => setNewAccessToken(data.accessToken))
+      .catch((e) => console.log('status: ' + e.response.status));
+  }
 
   return (
     <UserContext.Provider
