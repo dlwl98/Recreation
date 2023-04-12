@@ -1,4 +1,3 @@
-import Cookies from 'js-cookie';
 import { useState } from 'react';
 import { useContext } from 'react';
 import { toast } from 'react-hot-toast';
@@ -9,13 +8,17 @@ import { isEmailFormat, isPasswordFormat } from '@utils/index';
 import { ErrorWithMessage } from '@custom-types/error';
 
 import { useLoginMutation } from '@hooks/useLoginMutation';
+import { useReactCookie } from '@hooks/useReactCookie';
 
 import { ModalContext } from '@context/ModalContext';
+import { UserContext } from '@context/UserContext';
 
 export default function useLogin() {
   const nevigate = useNavigate();
   const { closeModal } = useContext(ModalContext);
+  const { login } = useContext(UserContext);
   const { mutate: loginMutate } = useLoginMutation();
+  const { setCookie } = useReactCookie();
 
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -41,8 +44,11 @@ export default function useLogin() {
           { email, password },
           {
             onSuccess: (data) => {
-              localStorage.setItem('accessToken', data.tokens.access_token);
-              Cookies.set('refreshToken', data.tokens.refresh_token, { expires: 30 });
+              login(data);
+              setCookie('refreshToken', data.tokens.refreshToken, {
+                expires: new Date(Date.now() + 30 * 24 * 60 * 60 * 1000),
+                httpOnly: true,
+              });
               toast.success('로그인이 완료되었습니다');
               closeModal();
               nevigate('/');

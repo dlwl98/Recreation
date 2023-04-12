@@ -8,8 +8,8 @@ export type LoginFormData = {
 export type PostLoginResponse = {
   username: string;
   tokens: {
-    access_token: string;
-    refresh_token: string;
+    accessToken: string;
+    refreshToken: string;
   };
 };
 

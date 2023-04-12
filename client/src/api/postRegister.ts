@@ -9,8 +9,8 @@ export type RegisterFormData = {
 export type PostRegisterResponse = {
   username: string;
   tokens: {
-    access_token: string;
-    refresh_token: string;
+    accessToken: string;
+    refreshToken: string;
   };
 };
 
