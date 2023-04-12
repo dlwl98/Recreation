@@ -1,4 +1,4 @@
-export class RegisterValidateError extends Error {
+export class ErrorWithMessage extends Error {
   public message: string;
 
   constructor(message: string) {
