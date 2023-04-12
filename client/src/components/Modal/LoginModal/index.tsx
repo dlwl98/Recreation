@@ -8,7 +8,7 @@ const LoginModal: React.FC<ModalProps> = ({ closeModal }) => {
   return (
     <LoginModalOuter onClick={closeModal}>
       <LoginModalContent onClick={(e) => e.stopPropagation()}>
-        <LoginForm onSubmit={console.log} />
+        <LoginForm />
       </LoginModalContent>
     </LoginModalOuter>
   );

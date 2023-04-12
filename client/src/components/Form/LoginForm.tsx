@@ -1,7 +1,9 @@
 import { css } from '@emotion/css';
-import { useContext, useState } from 'react';
+import { useContext } from 'react';
 
 import { theme } from '@styles/theme';
+
+import useLogin from '@hooks/useLogin';
 
 import { ModalContext } from '@context/ModalContext';
 
@@ -10,27 +12,15 @@ import Flex from '@ds/Flex';
 import Input from '@ds/Input';
 import Spacing from '@ds/Spacing';
 
-type Props = {
-  onSubmit: (username: string, password: string) => void;
-};
-
-const LoginForm: React.FC<Props> = ({ onSubmit }) => {
+const LoginForm: React.FC = () => {
+  const { email, setEmail, password, setPassword, onSubmit } = useLogin();
   const { openModal } = useContext(ModalContext);
-  const [username, setUsername] = useState('');
-  const [password, setPassword] = useState('');
 
   return (
-    <Flex<'form'>
-      as="form"
-      direction="column"
-      onSubmit={(e) => {
-        e.preventDefault();
-        onSubmit(username, password);
-      }}
-    >
-      <label>아이디</label>
+    <Flex<'form'> as="form" direction="column" onSubmit={onSubmit}>
+      <label>이메일</label>
       <Spacing size={10} />
-      <Input type="text" value={username} onChange={(e) => setUsername(e.target.value)} />
+      <Input type="text" value={email} onChange={(e) => setEmail(e.target.value)} />
 
       <Spacing size={10} />
       <label>비밀번호</label>

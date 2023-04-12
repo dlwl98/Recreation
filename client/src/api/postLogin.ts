@@ -1,7 +1,7 @@
 import axiosInstance from '@api/axiosInstance';
 
 export type LoginFormData = {
-  username: string;
+  email: string;
   password: string;
 };
 
@@ -13,9 +13,9 @@ export type PostLoginResponse = {
   };
 };
 
-export const postLogin = async ({ username, password }: LoginFormData) => {
+export const postLogin = async ({ email, password }: LoginFormData) => {
   const response = await axiosInstance.post<PostLoginResponse>('/login', {
-    username,
+    email,
     password,
   });
   return response.data;
