@@ -35,6 +35,8 @@ export default defineConfig({
       { find: '@utils', replacement: '/src/utils' },
       { find: '@layouts', replacement: '/src/layouts' },
       { find: '@ds', replacement: '/src/_ds' },
+      { find: '@hooks', replacement: '/src/hooks' },
+      { find: '@custom-types', replacement: '/src/custom-types' },
       { find: '@', replacement: '/src' },
     ],
   },
