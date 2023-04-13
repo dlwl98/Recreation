@@ -7,6 +7,7 @@ import useLogin from '@hooks/useLogin';
 
 import { ModalContext } from '@context/ModalContext';
 
+import Button from '@ds/Button';
 import ContentMargin from '@ds/ContentMargin';
 import Flex from '@ds/Flex';
 import Input from '@ds/Input';
@@ -29,13 +30,18 @@ const LoginForm: React.FC = () => {
 
       <Spacing size={20} />
       <div className={buttons}>
-        <button className={buttonStyles} type="submit">
+        <Button color="white" border="none" backgroundColor={theme.color.gray700} type="submit">
           로그인
-        </button>
+        </Button>
         <ContentMargin size="20px">
-          <button className={buttonStyles} onClick={() => openModal('register-modal')}>
+          <Button
+            color="white"
+            border="none"
+            backgroundColor={theme.color.gray700}
+            onClick={() => openModal('register-modal')}
+          >
             가입하기
-          </button>
+          </Button>
         </ContentMargin>
       </div>
     </Flex>
@@ -51,7 +57,8 @@ const buttonStyles = css`
   background-color: ${theme.color.gray700};
   color: white;
   border: none;
-  border-radius: 5px;
+  border-radius: 10px;
+  font-weight: 600;
   cursor: pointer;
 `;
 
