@@ -9,11 +9,16 @@
   "importOrder": [
     "^@assets/(.*)$",
     "^@constants$",
+    "^@utils/(.*)$",
+    "^@custom-types/(.*)$",
     "^@styles/(.*)$",
     "^@api/(.*)$",
+    "^@hooks/(.*)$",
     "^@context/(.*)$",
     "^@pages/(.*)$",
+    "^@layouts/(.*)$",
     "^@components/(.*)$",
+    "^@ds/(.*)$",
     "^[./]"
   ],
   "importOrderSeparation": true,

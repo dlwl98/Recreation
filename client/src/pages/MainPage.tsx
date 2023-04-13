@@ -1,18 +1,28 @@
-import { useEffect } from 'react';
+import { Suspense } from 'react';
 
-import { getHello } from '@api/getHello';
+import ErrorBoundary from '@utils/ErrorBoundary';
+
+import { theme } from '@styles/theme';
+
+import MainLayout from '@layouts/MainLayout';
 
 import Header from '@components/Header';
+import HelloQueryData from '@components/data/HelloQueryData';
+
+import Spacing from '@ds/Spacing';
 
 const MainPage = () => {
-  useEffect(() => {
-    getHello().then((data) => console.log(data));
-  }, []);
-
   return (
     <div>
       <Header shouldDisplaySearch={true} shouldDisplayProfile={true} />
-      <div>Main Page</div>
+      <Spacing size={theme.spacing.belowHeader} />
+      <MainLayout>
+        {/* <ErrorBoundary fallback={<div>error</div>}>
+          <Suspense fallback={<div>loading</div>}>
+            <HelloQueryData />
+          </Suspense>
+        </ErrorBoundary> */}
+      </MainLayout>
     </div>
   );
 };

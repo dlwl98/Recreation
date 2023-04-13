@@ -1,7 +1,7 @@
 export const theme = {
   color: {
-    gray0: '#d6d6d6',
-    gray1: '#5f615a',
+    gray100: '#d6d6d6',
+    gray700: '#5f615a',
     black: '#1e1e1e',
   },
 
@@ -13,6 +13,10 @@ export const theme = {
     xl: '24px',
     xxl: '32px',
     xxxl: '40px',
+  },
+
+  spacing: {
+    belowHeader: 30,
   },
 
   logo: {
