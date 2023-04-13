@@ -6,7 +6,7 @@ import { postRefresh } from '@api/postRefresh';
 import { useReactCookie } from '@hooks/useReactCookie';
 
 export type UserContextType = {
-  isLoggedIn: boolean;
+  isLoggedIn: boolean | null;
   username: string;
   accessToken: string;
   expireAt: number;
@@ -30,7 +30,7 @@ type UserProviderProps = {
 };
 
 export const UserContextProvider: React.FC<UserProviderProps> = ({ children }) => {
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [isLoggedIn, setIsLoggedIn] = useState<boolean | null>(null);
   const [username, setUsername] = useState('');
   const [accessToken, setAccessToken] = useState('');
   const [expireAt, setExpireAt] = useState<number>(0);
@@ -60,10 +60,15 @@ export const UserContextProvider: React.FC<UserProviderProps> = ({ children }) =
     setExpireAt(new Date().getTime() + 24 * 60 * 60 * 1000);
   };
 
-  if (!isLoggedIn) {
+  if (isLoggedIn === null) {
     postRefresh()
-      .then((data) => setNewAccessToken(data.accessToken))
-      .catch((e) => console.log('status: ' + e.response.status));
+      .then((data) => {
+        setIsLoggedIn(true);
+        return setNewAccessToken(data.accessToken);
+      })
+      .catch(() => {
+        setIsLoggedIn(false);
+      });
   }
 
   return (
