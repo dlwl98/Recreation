@@ -4,6 +4,7 @@ import { theme } from '@styles/theme';
 
 import useRegister from '@hooks/useRegister';
 
+import Button from '@ds/Button';
 import Flex from '@ds/Flex';
 import Input from '@ds/Input';
 import Spacing from '@ds/Spacing';
@@ -44,9 +45,9 @@ const RegisterForm: React.FC = () => {
 
       <Spacing size={20} />
       <div className={buttons}>
-        <button className={buttonStyles} type="submit">
+        <Button color="white" border="none" backgroundColor={theme.color.gray700} type="submit">
           회원가입
-        </button>
+        </Button>
       </div>
     </Flex>
   );
@@ -55,14 +56,4 @@ const RegisterForm: React.FC = () => {
 const buttons = css`
   margin: auto;
 `;
-
-const buttonStyles = css`
-  padding: 10px;
-  background-color: ${theme.color.gray700};
-  color: white;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-`;
-
 export default RegisterForm;
