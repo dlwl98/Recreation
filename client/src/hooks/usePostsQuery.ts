@@ -11,6 +11,7 @@ export const usePostsQuery = (option: GetPostsOptions) =>
       return getPosts(option);
     },
     {
+      staleTime: 10000,
       onSuccess: (data) => {
         console.log(data);
       },
