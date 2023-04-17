@@ -1,4 +1,4 @@
-import { createContext, useState } from 'react';
+import { createContext, useEffect, useState } from 'react';
 
 import { PostLoginResponse } from '@api/postLogin';
 import { postRefresh } from '@api/postRefresh';
@@ -60,16 +60,18 @@ export const UserContextProvider: React.FC<UserProviderProps> = ({ children }) =
     setExpireAt(new Date().getTime() + 24 * 60 * 60 * 1000);
   };
 
-  if (isLoggedIn === null) {
-    postRefresh()
-      .then((data) => {
-        setIsLoggedIn(true);
-        return setNewAccessToken(data.accessToken);
-      })
-      .catch(() => {
-        setIsLoggedIn(false);
-      });
-  }
+  useEffect(() => {
+    if (isLoggedIn === null) {
+      postRefresh()
+        .then((data) => {
+          setIsLoggedIn(true);
+          return setNewAccessToken(data.accessToken);
+        })
+        .catch(() => {
+          setIsLoggedIn(false);
+        });
+    }
+  }, []);
 
   return (
     <UserContext.Provider
