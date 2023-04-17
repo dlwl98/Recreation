@@ -1,27 +1,23 @@
-import { Suspense } from 'react';
-
-import ErrorBoundary from '@utils/ErrorBoundary';
-
 import { theme } from '@styles/theme';
+
+import { usePostsQuery } from '@hooks/usePostsQuery';
 
 import MainLayout from '@layouts/MainLayout';
 
+import Cards from '@components/Cards';
 import Header from '@components/Header';
-import HelloQueryData from '@components/data/HelloQueryData';
 
 import Spacing from '@ds/Spacing';
 
 const MainPage = () => {
+  const { data, status } = usePostsQuery({ filter: 'all', order: 'popularity' });
+
   return (
     <div>
       <Header shouldDisplaySearch={true} shouldDisplayProfile={true} />
       <Spacing size={theme.spacing.belowHeader} />
       <MainLayout>
-        {/* <ErrorBoundary fallback={<div>error</div>}>
-          <Suspense fallback={<div>loading</div>}>
-            <HelloQueryData />
-          </Suspense>
-        </ErrorBoundary> */}
+        {status === 'success' ? <Cards width={200} cards={data.posts} /> : 'loading'}
       </MainLayout>
     </div>
   );
