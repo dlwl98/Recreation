@@ -28,23 +28,15 @@ const Cards: React.FC<Props> = ({ width, cards }) => {
 
   return (
     <Flex className={style}>
-      {cards.map((card, i) => {
+      {cards.map((card, i) => (
         <Card
           key={i}
           className={css`
             width: calc(100% / ${standard});
           `}
           card={card}
-        />;
-      })}
-      {/* {Array.from({ length: 100 }).map((_, i) => (
-        <Card
-          key={i}
-          className={css`
-            width: calc(100% / ${standard});
-          `}
         />
-      ))} */}
+      ))}
     </Flex>
   );
 };
