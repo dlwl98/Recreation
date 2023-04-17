@@ -23,6 +23,8 @@ export type GetPostsResponse = {
 };
 
 export const getPosts = async (option: GetPostsOptions) => {
-  const response = await axiosInstance.post<GetPostsResponse>('/posts', option);
+  const response = await axiosInstance.get<GetPostsResponse>(
+    `/posts/?filter=${option.filter}&order=${option.order}`,
+  );
   return response.data;
 };
