@@ -1,5 +1,5 @@
 import { css } from '@emotion/css';
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useState } from 'react';
 
 import { Post } from '@api/getPosts';
 
@@ -28,9 +28,9 @@ const Cards: React.FC<Props> = ({ width, cards }) => {
 
   return (
     <Flex className={style}>
-      {cards.map((card, i) => (
+      {cards.map((card) => (
         <Card
-          key={i}
+          key={card.id}
           className={css`
             width: calc(100% / ${standard});
           `}

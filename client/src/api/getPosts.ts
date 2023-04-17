@@ -5,6 +5,7 @@ import axiosInstance from './axiosInstance';
 export type PostOrder = 'newest' | 'popularity';
 
 export type Post = {
+  id: number;
   title: string;
   detail: string;
   username: string;

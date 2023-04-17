@@ -1,43 +1,53 @@
 import { rest } from 'msw';
 
-import { GetPostsOptions } from '@api/getPosts';
+import { Categories } from '@custom-types/Categories';
+
+import { GetPostsOptions, Post } from '@api/getPosts';
 
 type PostLoginReqBody = {
   email: string;
   password: string;
 };
 
+const mockposts: Post[] = Array.from({ length: 100 }).map((_, i) => {
+  const categories: Categories[] = ['choseong', '4word', 'sokdam'];
+  return {
+    id: i + 1,
+    title: `제목${i + 1}제목${i + 1}제목${i + 1}제목${i + 1}제목${i + 1}제목${i + 1}제목${
+      i + 1
+    }제목${i + 1}제목${i + 1}제목${i + 1}`,
+    detail: `내용입니다${i + 1}내용입니다${i + 1}내용입니다${i + 1}내용입니다${i + 1}내용입니다${
+      i + 1
+    }내용입니다${i + 1}내용입니다${i + 1}내용입니다${i + 1}내용입니다${i + 1}내용입니다${i + 1}`,
+    username: `testuser${i + 1}`,
+    createAt: new Date(new Date().getTime() - i * 10000),
+    likes: 22 + i,
+    category: categories[i % 3],
+  };
+});
+
 export const handlers = [
   rest.get<GetPostsOptions>('/api/posts', async (req, res, ctx) => {
+    const filter = req.url.searchParams.get('filter');
+    const order = req.url.searchParams.get('order');
+    let resultPosts = mockposts;
+
+    if (filter !== 'all') {
+      resultPosts = resultPosts.filter((post) => post.category === filter);
+    }
+
+    if (order === 'popularity') {
+      resultPosts = resultPosts.sort((a, b) => b.likes - a.likes);
+    }
+
+    if (order === 'newest') {
+      resultPosts = resultPosts.sort((a, b) => b.createAt.getTime() - a.createAt.getTime());
+    }
+
     return res(
       ctx.status(200),
       ctx.json({
-        posts: [
-          {
-            title: '123123',
-            detail: '123123',
-            username: '123123',
-            createAt: new Date(),
-            likes: '123',
-            category: '4word',
-          },
-          {
-            title: '123123',
-            detail: '123123',
-            username: '123123',
-            createAt: new Date(),
-            likes: '123',
-            category: '4word',
-          },
-          {
-            title: '123123',
-            detail: '123123',
-            username: '123123',
-            createAt: new Date(),
-            likes: '123',
-            category: '4word',
-          },
-        ],
+        posts: resultPosts,
       }),
     );
   }),
