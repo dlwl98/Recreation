@@ -1,13 +1,10 @@
 import { css } from '@emotion/css';
-import { useEffect, useState } from 'react';
-import { useQueryClient } from 'react-query';
 
 import { categories, categoriesDisplayString } from '@custom-types/Categories';
 
 import { theme } from '@styles/theme';
 
-import { GetPostsOptions } from '@api/getPosts';
-
+import usePostsOption from '@hooks/usePostsOption';
 import { usePostsQuery } from '@hooks/usePostsQuery';
 
 import MainLayout from '@layouts/MainLayout';
@@ -18,16 +15,8 @@ import Header from '@components/Header';
 import Spacing from '@ds/Spacing';
 
 const MainPage = () => {
-  const [option, setOption] = useState<GetPostsOptions>({ filter: 'all', order: 'newest' });
+  const { option, setFilter, setOrder } = usePostsOption();
   const { data, status } = usePostsQuery(option);
-
-  const setFilter = (e: React.ChangeEvent<HTMLSelectElement>) => {
-    setOption({ ...option, filter: e.target.value as GetPostsOptions['filter'] });
-  };
-
-  const setOrder = (e: React.ChangeEvent<HTMLSelectElement>) => {
-    setOption({ ...option, order: e.target.value as GetPostsOptions['order'] });
-  };
 
   return (
     <div>
