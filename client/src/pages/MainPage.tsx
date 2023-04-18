@@ -25,8 +25,8 @@ const MainPage = () => {
       <MainLayout>
         <select className={selectStyle} value={option.filter} onChange={setFilter}>
           <option value="all">전체</option>
-          {categories.map((category, i) => (
-            <option key={i} value={category}>
+          {categories.map((category) => (
+            <option key={category} value={category}>
               {categoriesDisplayString[category]}
             </option>
           ))}
