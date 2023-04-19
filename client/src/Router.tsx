@@ -4,14 +4,14 @@ import ModalRoute from '@utils/ModalRoute';
 
 import ErrorPage from '@pages/ErrorPage';
 import MainPage from '@pages/MainPage';
-import SearchPage from '@pages/SearchPage';
+import WritePage from '@pages/WritePage';
 
 const Router = () => {
   return (
     <Routes>
       <Route element={<ModalRoute />}>
         <Route path="/" element={<MainPage />} />
-        <Route path="/search" element={<SearchPage />} />
+        <Route path="/write" element={<WritePage />} />
         <Route path="/error" element={<ErrorPage />} />
         <Route path="*" element={<ErrorPage />} />
       </Route>

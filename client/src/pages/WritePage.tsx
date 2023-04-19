@@ -6,14 +6,14 @@ import Header from '@components/Header';
 
 import Spacing from '@ds/Spacing';
 
-const ErrorPage = () => {
+const WritePage = () => {
   return (
     <div>
       <Header shouldDisplayProfile={true} />
       <Spacing size={theme.spacing.belowHeader} />
-      <MainLayout>Error Page</MainLayout>
+      <MainLayout>Write Page</MainLayout>
     </div>
   );
 };
 
-export default ErrorPage;
+export default WritePage;

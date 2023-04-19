@@ -1,4 +1,6 @@
 import { css } from '@emotion/css';
+import { useContext } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 import { categories, categoriesDisplayString } from '@custom-types/Categories';
 
@@ -8,6 +10,8 @@ import { GetPostsOptions } from '@api/getPosts';
 
 import usePostsOption from '@hooks/usePostsOption';
 import { usePostsQuery } from '@hooks/usePostsQuery';
+
+import { UserContext } from '@context/UserContext';
 
 import MainLayout from '@layouts/MainLayout';
 
@@ -22,10 +26,12 @@ import Spacing from '@ds/Spacing';
 const MainPage = () => {
   const { option, setFilter, setOrder } = usePostsOption();
   const { data, status } = usePostsQuery(option);
+  const navigate = useNavigate();
+  const { isLoggedIn } = useContext(UserContext);
 
   return (
     <div>
-      <Header shouldDisplaySearch={true} shouldDisplayProfile={true} />
+      <Header shouldDisplayProfile={true} />
       <Spacing size={theme.spacing.belowHeader} />
       <MainLayout>
         <Flex align="center">
@@ -75,15 +81,18 @@ const MainPage = () => {
           </Flex>
           <Flex align="center">
             <SearchBar />
-            <Button
-              color={theme.color.orange700}
-              border="none"
-              className={css`
-                margin-right: 10px;
-              `}
-            >
-              글쓰기
-            </Button>
+            {isLoggedIn ? (
+              <Button
+                color={theme.color.orange700}
+                border="none"
+                className={marginRight10px}
+                onClick={() => navigate('/write')}
+              >
+                글쓰기
+              </Button>
+            ) : (
+              <span className={marginRight10px} />
+            )}
           </Flex>
         </Flex>
 
@@ -92,6 +101,10 @@ const MainPage = () => {
     </div>
   );
 };
+
+const marginRight10px = css`
+  margin-right: 10px;
+`;
 
 const filterButtonStyle = (option: GetPostsOptions, value: string) => {
   return css`
