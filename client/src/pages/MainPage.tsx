@@ -1,6 +1,8 @@
 import { css } from '@emotion/css';
-import { useContext } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { Suspense, useContext } from 'react';
+import { Navigate, useNavigate } from 'react-router-dom';
+
+import ErrorBoundary from '@utils/ErrorBoundary';
 
 import { categories, categoriesDisplayString } from '@custom-types/Categories';
 
@@ -9,15 +11,15 @@ import { theme } from '@styles/theme';
 import { GetPostsOptions } from '@api/getPosts';
 
 import usePostsOption from '@hooks/usePostsOption';
-import { usePostsQuery } from '@hooks/usePostsQuery';
 
 import { UserContext } from '@context/UserContext';
 
 import MainLayout from '@layouts/MainLayout';
 
-import Cards from '@components/Cards';
 import Header from '@components/Header';
 import SearchBar from '@components/SearchBar';
+import SuspenseCards from '@components/SuspenseCards';
+import PostsListData from '@components/data/PostsListData';
 
 import Button from '@ds/Button';
 import Flex from '@ds/Flex';
@@ -25,7 +27,6 @@ import Spacing from '@ds/Spacing';
 
 const MainPage = () => {
   const { option, setFilter, setOrder } = usePostsOption();
-  const { data, status } = usePostsQuery(option);
   const navigate = useNavigate();
   const { isLoggedIn } = useContext(UserContext);
 
@@ -95,8 +96,11 @@ const MainPage = () => {
             )}
           </Flex>
         </Flex>
-
-        {status === 'success' ? <Cards width={400} cards={data.posts} /> : 'loading'}
+        <Suspense fallback={<SuspenseCards />}>
+          <ErrorBoundary fallback={<Navigate to="/error" />}>
+            <PostsListData option={option} />
+          </ErrorBoundary>
+        </Suspense>
       </MainLayout>
     </div>
   );

@@ -9,7 +9,7 @@ type PostLoginReqBody = {
   password: string;
 };
 
-const mockposts: Post[] = Array.from({ length: 100 }).map((_, i) => {
+export const mockposts: Post[] = Array.from({ length: 100 }).map((_, i) => {
   const categories: Categories[] = ['choseong', '4word', 'sokdam'];
   return {
     id: i + 1,

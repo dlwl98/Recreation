@@ -12,6 +12,7 @@ export const usePostsQuery = (option: GetPostsOptions) =>
     },
     {
       staleTime: 10000,
+      suspense: true,
       onSuccess: (data) => {
         console.log(data);
       },
