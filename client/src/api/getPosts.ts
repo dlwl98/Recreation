@@ -17,6 +17,7 @@ export type Post = {
 export type GetPostsOptions = {
   filter: 'all' | Categories;
   order: PostOrder;
+  search: string;
 };
 
 export type GetPostsResponse = {
@@ -24,8 +25,12 @@ export type GetPostsResponse = {
 };
 
 export const getPosts = async (option: GetPostsOptions) => {
+  const filterParam = `filter=${option.filter}`;
+  const orderParam = `order=${option.order}`;
+  const searchParam = `search=${option.search}`;
+
   const response = await axiosInstance.get<GetPostsResponse>(
-    `/posts/?filter=${option.filter}&order=${option.order}`,
+    '/posts/?' + filterParam + '&' + orderParam + '&' + searchParam,
   );
   return response.data;
 };

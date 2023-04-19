@@ -7,8 +7,9 @@ export default function usePostsOption() {
   const [searchParams, setSearchParams] = useSearchParams();
   const filter = searchParams.get('filter') || 'all';
   const order = searchParams.get('order') || 'newest';
+  const search = searchParams.get('search') || '';
 
-  const option = { filter, order } as GetPostsOptions;
+  const option = { filter, order, search } as GetPostsOptions;
 
   const setFilter = (e: React.ChangeEvent<HTMLSelectElement>) => {
     searchParams.set('filter', e.target.value);

@@ -30,6 +30,8 @@ export const handlers = [
   rest.get<GetPostsOptions>('/api/posts', async (req, res, ctx) => {
     const filter = req.url.searchParams.get('filter');
     const order = req.url.searchParams.get('order');
+    const search = req.url.searchParams.get('search') || '';
+
     let resultPosts = mockposts;
 
     if (filter !== 'all') {
@@ -42,6 +44,12 @@ export const handlers = [
 
     if (order === 'newest') {
       resultPosts = resultPosts.sort((a, b) => b.createAt.getTime() - a.createAt.getTime());
+    }
+
+    if (search !== '') {
+      resultPosts = resultPosts.filter(
+        (post) => post.title.includes(search) || post.detail.includes(search),
+      );
     }
 
     return res(
