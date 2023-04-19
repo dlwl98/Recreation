@@ -1,51 +1,25 @@
-import { useState } from 'react';
+import { useNavigate, useSearchParams } from 'react-router-dom';
 
 import { GetPostsOptions } from '@api/getPosts';
 
-export class PostsOptionSingleton {
-  private static instance: PostsOptionSingleton;
-  private option: GetPostsOptions;
-
-  private constructor() {
-    this.option = { filter: 'all', order: 'newest' };
-  }
-
-  public static getInstance(): PostsOptionSingleton {
-    if (!PostsOptionSingleton.instance) {
-      PostsOptionSingleton.instance = new PostsOptionSingleton();
-    }
-    return PostsOptionSingleton.instance;
-  }
-
-  public getOption(): any {
-    return this.option;
-  }
-
-  public setOption(newOption: any): void {
-    this.option = newOption;
-  }
-}
-
 export default function usePostsOption() {
-  const postOptionInstance = PostsOptionSingleton.getInstance();
-  const [option, setOption] = useState<GetPostsOptions>(postOptionInstance.getOption());
+  const navigate = useNavigate();
+  const [searchParams, setSearchParams] = useSearchParams();
+  const filter = searchParams.get('filter') || 'all';
+  const order = searchParams.get('order') || 'newest';
+
+  const option = { filter, order } as GetPostsOptions;
 
   const setFilter = (e: React.ChangeEvent<HTMLSelectElement>) => {
-    const newOption = {
-      ...option,
-      filter: e.target.value as GetPostsOptions['filter'],
-    };
-    setOption(newOption);
-    postOptionInstance.setOption(newOption);
+    searchParams.set('filter', e.target.value);
+    setSearchParams(searchParams);
+    navigate({ pathname: '/', search: searchParams.toString() }, { replace: true });
   };
 
   const setOrder = (e: React.ChangeEvent<HTMLSelectElement>) => {
-    const newOption = {
-      ...option,
-      order: e.target.value as GetPostsOptions['order'],
-    };
-    setOption(newOption);
-    postOptionInstance.setOption(newOption);
+    searchParams.set('order', e.target.value);
+    setSearchParams(searchParams);
+    navigate({ pathname: '/', search: searchParams.toString() }, { replace: true });
   };
 
   return {
