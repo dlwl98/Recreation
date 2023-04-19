@@ -1,5 +1,7 @@
 import { css, cx } from '@emotion/css';
 
+import Flex from '@ds/Flex';
+
 type Props = {
   name: string;
   fill: number;
@@ -11,7 +13,8 @@ type Props = {
 
 const Icon: React.FC<Props> = ({ name, fill, size, color, border = 'none', className }) => {
   return (
-    <span
+    <Flex
+      align="center"
       className={cx(
         'material-symbols-outlined',
         css`
@@ -25,7 +28,7 @@ const Icon: React.FC<Props> = ({ name, fill, size, color, border = 'none', class
       )}
     >
       {name}
-    </span>
+    </Flex>
   );
 };
 
