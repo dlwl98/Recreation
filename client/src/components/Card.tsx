@@ -19,7 +19,7 @@ type Props = {
 };
 
 const Card: React.FC<Props> = ({ className, card }) => {
-  const { title, detail, username, createAt, likes, category } = card;
+  const { title, detail, username, createAt, likes, hits, category } = card;
   const createdAtString = getCreatedAtString(createAt);
   return (
     <div className={className}>
@@ -42,13 +42,23 @@ const Card: React.FC<Props> = ({ className, card }) => {
           `}
         >
           <Flex>
-            <Flex
-              className={css`
-                margin-right: 15px;
-              `}
-            >
+            <div className={marginRight10px}>{createdAtString}</div>
+            <div>{'by ' + username}</div>
+          </Flex>
+          <Flex align="center">
+            <Flex className={marginRight10px} align="flex-end">
               <Icon
-                name="Favorite"
+                name="visibility"
+                fill={0}
+                size="1.2rem"
+                color={theme.color.gray700}
+                className={css`
+                  margin-right: 2px;
+                `}
+              />
+              <div className={marginRight10px}>{hits}</div>
+              <Icon
+                name="favorite"
                 fill={1}
                 size="1.2rem"
                 color={theme.color.gray700}
@@ -58,22 +68,19 @@ const Card: React.FC<Props> = ({ className, card }) => {
               />
               {likes}
             </Flex>
-            <div>{categoriesDisplayString[category]}</div>
           </Flex>
-          <div
-            className={css`
-              margin-right: 5px;
-            `}
-          >
-            {username}
-          </div>
         </Flex>
         <Spacing />
-        <div>{createdAtString}</div>
+
+        <div className={marginRight10px}>{categoriesDisplayString[category]}</div>
       </Flex>
     </div>
   );
 };
+
+const marginRight10px = css`
+  margin-right: 10px;
+`;
 
 const cardTitleStyle = css`
   margin: 10px 0;

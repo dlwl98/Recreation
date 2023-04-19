@@ -22,6 +22,7 @@ export const mockposts: Post[] = Array.from({ length: 100 }).map((_, i) => {
     username: `testuser${i + 1}`,
     createAt: new Date(new Date().getTime() - i * 10000),
     likes: 22 + i,
+    hits: 100 + i * 10,
     category: categories[i % 3],
   };
 });
@@ -39,7 +40,7 @@ export const handlers = [
     }
 
     if (order === 'popularity') {
-      resultPosts = resultPosts.sort((a, b) => b.likes - a.likes);
+      resultPosts = resultPosts.sort((a, b) => b.hits - a.hits);
     }
 
     if (order === 'newest') {

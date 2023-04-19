@@ -11,6 +11,7 @@ export type Post = {
   username: string;
   createAt: Date;
   likes: number;
+  hits: number;
   category: Categories;
 };
 
