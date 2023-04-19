@@ -2,6 +2,8 @@ export const theme = {
   color: {
     gray100: '#d6d6d6',
     gray700: '#5f615a',
+    orange100: '#FFCCAA',
+    orange700: '#ff6600',
     black: '#1e1e1e',
   },
 
