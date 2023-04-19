@@ -11,14 +11,22 @@ export default function usePostsOption() {
 
   const option = { filter, order, search } as GetPostsOptions;
 
-  const setFilter = (e: React.ChangeEvent<HTMLSelectElement>) => {
-    searchParams.set('filter', e.target.value);
+  const setFilter = (e: React.MouseEvent<HTMLButtonElement>) => {
+    const target = e.target as HTMLButtonElement;
+    searchParams.set('filter', target.value);
     setSearchParams(searchParams);
     navigate({ pathname: '/', search: searchParams.toString() }, { replace: true });
   };
 
-  const setOrder = (e: React.ChangeEvent<HTMLSelectElement>) => {
-    searchParams.set('order', e.target.value);
+  const setOrder = (e: React.MouseEvent<HTMLButtonElement>) => {
+    const target = e.target as HTMLButtonElement;
+    searchParams.set('order', target.value);
+    setSearchParams(searchParams);
+    navigate({ pathname: '/', search: searchParams.toString() }, { replace: true });
+  };
+
+  const setSearch = (inputString: string) => {
+    searchParams.set('search', inputString);
     setSearchParams(searchParams);
     navigate({ pathname: '/', search: searchParams.toString() }, { replace: true });
   };
@@ -27,5 +35,6 @@ export default function usePostsOption() {
     option,
     setFilter,
     setOrder,
+    setSearch,
   };
 }

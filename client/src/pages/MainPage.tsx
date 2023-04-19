@@ -4,6 +4,8 @@ import { categories, categoriesDisplayString } from '@custom-types/Categories';
 
 import { theme } from '@styles/theme';
 
+import { GetPostsOptions } from '@api/getPosts';
+
 import usePostsOption from '@hooks/usePostsOption';
 import { usePostsQuery } from '@hooks/usePostsQuery';
 
@@ -11,7 +13,10 @@ import MainLayout from '@layouts/MainLayout';
 
 import Cards from '@components/Cards';
 import Header from '@components/Header';
+import SearchBar from '@components/SearchBar';
 
+import Button from '@ds/Button';
+import Flex from '@ds/Flex';
 import Spacing from '@ds/Spacing';
 
 const MainPage = () => {
@@ -23,32 +28,89 @@ const MainPage = () => {
       <Header shouldDisplaySearch={true} shouldDisplayProfile={true} />
       <Spacing size={theme.spacing.belowHeader} />
       <MainLayout>
-        <select className={selectStyle} value={option.filter} onChange={setFilter}>
-          <option value="all">전체</option>
+        <Flex align="center">
+          <Button
+            color={theme.color.gray700}
+            border={`1px solid ${theme.color.gray700}`}
+            value="all"
+            onClick={setFilter}
+            className={filterButtonStyle(option, 'all')}
+          >
+            전체
+          </Button>
           {categories.map((category) => (
-            <option key={category} value={category}>
+            <Button
+              key={category}
+              value={category}
+              color={theme.color.gray700}
+              border={`1px solid ${theme.color.gray700}`}
+              onClick={setFilter}
+              className={filterButtonStyle(option, category)}
+            >
               {categoriesDisplayString[category]}
-            </option>
+            </Button>
           ))}
-        </select>
-        <select className={selectStyle} value={option.order} onChange={setOrder}>
-          <option value="newest">최신순</option>
-          <option value="popularity">인기순</option>
-        </select>
+        </Flex>
+        <Spacing />
+        <Flex align="center" justify="space-between">
+          <Flex align="center">
+            <Button
+              color={theme.color.gray700}
+              border="none"
+              value="newest"
+              onClick={setOrder}
+              className={orderButtonStyle(option, 'newest')}
+            >
+              최신순
+            </Button>
+            <Button
+              color={theme.color.gray700}
+              border="none"
+              value="popularity"
+              onClick={setOrder}
+              className={orderButtonStyle(option, 'popularity')}
+            >
+              인기순
+            </Button>
+          </Flex>
+          <Flex align="center">
+            <SearchBar />
+            <Button
+              color={theme.color.orange700}
+              border="none"
+              className={css`
+                margin-right: 10px;
+              `}
+            >
+              글쓰기
+            </Button>
+          </Flex>
+        </Flex>
+
         {status === 'success' ? <Cards width={400} cards={data.posts} /> : 'loading'}
       </MainLayout>
     </div>
   );
 };
 
-const selectStyle = css`
-  border: 1px solid ${theme.color.gray700};
-  border-radius: 5px;
-  color: ${theme.color.gray700};
-  font-size: 1rem;
-  padding: 10px;
-  width: 100px;
-  margin-left: 10px;
-`;
+const filterButtonStyle = (option: GetPostsOptions, value: string) => {
+  return css`
+    margin-left: 10px;
+    ${option.filter === value && {
+      backgroundColor: theme.color.orange700,
+      color: 'white',
+      border: `1px solid ${theme.color.orange700}`,
+    }}
+  `;
+};
+
+const orderButtonStyle = (option: GetPostsOptions, value: string) => {
+  return css`
+    margin-left: 5px;
+    ${option.order === value && {
+      color: theme.color.orange700,
+    }}
+  `;
+};
 
 export default MainPage;

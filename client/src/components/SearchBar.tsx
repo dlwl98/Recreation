@@ -1,6 +1,9 @@
 import { css } from '@emotion/css';
+import { useState } from 'react';
 
 import { theme } from '@styles/theme';
+
+import usePostsOption from '@hooks/usePostsOption';
 
 import Icon from '@components/Icon';
 
@@ -9,47 +12,24 @@ import Flex from '@ds/Flex';
 import Input from '@ds/Input';
 
 const SearchBar = () => {
+  const [inputString, setInputString] = useState('');
+  const { setSearch } = usePostsOption();
+
   return (
-    <div className={outer}>
-      <Flex align="center" justify="space-between" className={inner}>
+    <div>
+      <Flex align="center" justify="space-between">
+        <Input value={inputString} onChange={(e) => setInputString(e.target.value)} />
         <ContentMargin size="5px" />
-        <Input className={input} />
-
-        <ContentMargin size="5px" />
-        <Icon name="search" fill={0} size="2.2rem" color={theme.color.black} />
-
-        <ContentMargin size="5px" />
+        <div className={searchButtonStyle} onClick={() => setSearch(inputString)}>
+          <Icon name="search" fill={0} size="2rem" color={theme.color.gray700} />
+        </div>
       </Flex>
     </div>
   );
 };
 
-const outer = css`
-  height: 3rem;
-  @media (max-width: 768px) {
-    height: 2rem;
-  }
-`;
-
-const inner = css`
-  margin: auto;
-  height: 100%;
-  border: 2px solid ${theme.color.gray700};
-  border-radius: 5px;
-  max-width: 1000px;
-`;
-
-const input = css`
-  width: 100%;
-  border: none;
-  :focus {
-    border: none;
-  }
-  font-size: ${theme.fontSize.lg};
-  @media (max-width: 768px) {
-    height: 1.2rem;
-    font-size: ${theme.fontSize.md};
-  }
+const searchButtonStyle = css`
+  cursor: pointer;
 `;
 
 export default SearchBar;
