@@ -9,10 +9,10 @@ import { theme } from '@styles/theme';
 
 import { Post } from '@api/getPosts';
 
+import Icon from '@components/Icon';
+
 import Flex from '@ds/Flex';
 import Spacing from '@ds/Spacing';
-
-import Icon from './Icon';
 
 type Props = {
   className: string;

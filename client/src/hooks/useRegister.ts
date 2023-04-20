@@ -8,11 +8,10 @@ import { isEmailFormat, isPasswordFormat } from '@utils/index';
 import { ErrorWithMessage } from '@custom-types/error';
 
 import { useReactCookie } from '@hooks/useReactCookie';
+import { useRegisterMutation } from '@hooks/useRegisterMutation';
 
 import { ModalContext } from '@context/ModalContext';
 import { UserContext } from '@context/UserContext';
-
-import { useRegisterMutation } from './useRegisterMutation';
 
 export default function useRegister() {
   const nevigate = useNavigate();

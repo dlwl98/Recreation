@@ -1,5 +1,5 @@
-import axiosInstance from './axiosInstance';
-import { Post } from './getPosts';
+import axiosInstance from '@api/axiosInstance';
+import { Post } from '@api/getPosts';
 
 export type PostElement = {
   quiz: string;
