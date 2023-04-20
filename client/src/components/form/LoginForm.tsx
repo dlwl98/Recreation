@@ -1,6 +1,7 @@
 import { css } from '@emotion/css';
 import { useContext } from 'react';
 
+import { inputFocusStyle } from '@styles/inputFocusStyle';
 import { theme } from '@styles/theme';
 
 import useLogin from '@hooks/useLogin';
@@ -21,23 +22,33 @@ const LoginForm: React.FC = () => {
     <Flex<'form'> as="form" direction="column" onSubmit={onSubmit}>
       <label>이메일</label>
       <Spacing size={10} />
-      <Input type="text" value={email} onChange={(e) => setEmail(e.target.value)} />
+      <Input
+        type="text"
+        value={email}
+        onChange={(e) => setEmail(e.target.value)}
+        className={inputFocusStyle}
+      />
 
       <Spacing size={10} />
       <label>비밀번호</label>
       <Spacing size={10} />
-      <Input type="password" value={password} onChange={(e) => setPassword(e.target.value)} />
+      <Input
+        type="password"
+        value={password}
+        onChange={(e) => setPassword(e.target.value)}
+        className={inputFocusStyle}
+      />
 
       <Spacing size={20} />
       <div className={buttons}>
-        <Button color="white" border="none" backgroundColor={theme.color.gray700} type="submit">
+        <Button color="white" border="none" backgroundColor={theme.color.orange700} type="submit">
           로그인
         </Button>
         <ContentMargin size="20px">
           <Button
             color="white"
             border="none"
-            backgroundColor={theme.color.gray700}
+            backgroundColor={theme.color.orange700}
             onClick={() => openModal('register-modal')}
           >
             가입하기

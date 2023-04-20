@@ -3,20 +3,17 @@ import { theme } from '@styles/theme';
 import MainLayout from '@layouts/MainLayout';
 
 import Header from '@components/Header';
-import SearchBar from '@components/SearchBar';
 
 import Spacing from '@ds/Spacing';
 
-const SearchPage = () => {
+const WritePage = () => {
   return (
     <div>
-      <Header shouldDisplaySearch={false} shouldDisplayProfile={true} />
+      <Header shouldDisplayProfile={true} />
       <Spacing size={theme.spacing.belowHeader} />
-      <MainLayout>
-        <SearchBar />
-      </MainLayout>
+      <MainLayout>Write Page</MainLayout>
     </div>
   );
 };
 
-export default SearchPage;
+export default WritePage;

@@ -9,7 +9,7 @@ import Spacing from '@ds/Spacing';
 const ErrorPage = () => {
   return (
     <div>
-      <Header shouldDisplaySearch={true} shouldDisplayProfile={true} />
+      <Header shouldDisplayProfile={true} />
       <Spacing size={theme.spacing.belowHeader} />
       <MainLayout>Error Page</MainLayout>
     </div>
