@@ -7,7 +7,7 @@ import { postRefresh } from '@api/postRefresh';
 import { UserContext } from '@context/UserContext';
 
 const axiosAuthInstance = axios.create({
-  baseURL: 'api',
+  baseURL: '/api',
   withCredentials: true,
 });
 
