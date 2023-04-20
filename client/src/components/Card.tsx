@@ -1,4 +1,5 @@
-import { css } from '@emotion/css';
+import { css, cx } from '@emotion/css';
+import { useNavigate } from 'react-router-dom';
 
 import { getCreatedAtString } from '@utils/getCreatedAtString';
 
@@ -19,19 +20,38 @@ type Props = {
 };
 
 const Card: React.FC<Props> = ({ className, card }) => {
-  const { title, detail, username, createAt, likes, hits, category } = card;
+  const { id, title, detail, username, createAt, likes, hits, category } = card;
   const createdAtString = getCreatedAtString(createAt);
+  const navigate = useNavigate();
+
   return (
     <div className={className}>
       <Flex
         direction="column"
+        onClick={() => navigate(`/post/${id}`)}
         className={css`
           margin: 10px;
           padding: 10px;
           background-color: ${theme.color.gray100};
           border-radius: 5px;
+          border: 2px solid ${theme.color.gray100};
+          cursor: pointer;
+          :hover {
+            border: 2px solid ${theme.color.orange700};
+          }
         `}
       >
+        <div
+          className={cx(
+            marginRight10px,
+            css`
+              font-weight: 800;
+              color: ${theme.color.orange700};
+            `,
+          )}
+        >
+          {categoriesDisplayString[category]}
+        </div>
         <h3 className={cardTitleStyle}>{title}</h3>
         <div className={cardDetailStyle}>{detail}</div>
         <Spacing size={30} />
@@ -71,8 +91,6 @@ const Card: React.FC<Props> = ({ className, card }) => {
           </Flex>
         </Flex>
         <Spacing />
-
-        <div className={marginRight10px}>{categoriesDisplayString[category]}</div>
       </Flex>
     </div>
   );
