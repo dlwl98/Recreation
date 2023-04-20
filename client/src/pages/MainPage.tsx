@@ -1,4 +1,4 @@
-import { css } from '@emotion/css';
+import { css, cx } from '@emotion/css';
 import { Suspense, useContext } from 'react';
 import { Navigate, useNavigate } from 'react-router-dom';
 
@@ -59,7 +59,13 @@ const MainPage = () => {
           ))}
         </Flex>
         <Spacing />
-        <Flex align="center" justify="space-between">
+        <Flex
+          align="center"
+          justify="space-between"
+          className={css`
+            flex-wrap: wrap;
+          `}
+        >
           <Flex align="center">
             <Button
               color={theme.color.gray700}
@@ -80,13 +86,25 @@ const MainPage = () => {
               인기순
             </Button>
           </Flex>
-          <Flex align="center">
+          <Flex
+            align="center"
+            className={css`
+              margin-left: 10px;
+            `}
+          >
             <SearchBar />
             {isLoggedIn ? (
               <Button
                 color={theme.color.orange700}
                 border="none"
-                className={marginRight10px}
+                className={cx(
+                  marginRight10px,
+                  css`
+                    :hover {
+                      color: ${theme.color.orange100};
+                    }
+                  `,
+                )}
                 onClick={() => navigate('/write')}
               >
                 글쓰기
@@ -113,11 +131,15 @@ const marginRight10px = css`
 const filterButtonStyle = (option: GetPostsOptions, value: string) => {
   return css`
     margin-left: 10px;
-    ${option.filter === value && {
-      backgroundColor: theme.color.orange700,
-      color: 'white',
-      border: `1px solid ${theme.color.orange700}`,
-    }}
+    ${option.filter === value
+      ? {
+          backgroundColor: theme.color.orange700,
+          color: 'white',
+          border: `1px solid ${theme.color.orange700}`,
+        }
+      : {
+          ':hover': { borderColor: theme.color.orange700 },
+        }}
   `;
 };
 
