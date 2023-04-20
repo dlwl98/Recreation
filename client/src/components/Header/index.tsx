@@ -8,16 +8,14 @@ import { UserContext } from '@context/UserContext';
 import LoginIcon from '@components/Header/LoginIcon';
 import LogoIcon from '@components/Header/LogoIcon';
 import ProfileIcon from '@components/Header/ProfileIcon';
-import SearchIcon from '@components/Header/SearchIcon';
 
 import Flex from '@ds/Flex';
 
 type Props = {
-  shouldDisplaySearch: boolean;
   shouldDisplayProfile: boolean;
 };
 
-const Header: React.FC<Props> = ({ shouldDisplaySearch, shouldDisplayProfile }) => {
+const Header: React.FC<Props> = ({ shouldDisplayProfile }) => {
   const { isLoggedIn } = useContext(UserContext);
   return (
     <div className={outer}>
@@ -26,10 +24,7 @@ const Header: React.FC<Props> = ({ shouldDisplaySearch, shouldDisplayProfile }) 
           <LogoIcon />
         </Flex>
 
-        <Flex>
-          {shouldDisplaySearch ? <SearchIcon /> : <></>}
-          {shouldDisplayProfile ? isLoggedIn ? <ProfileIcon /> : <LoginIcon /> : <></>}
-        </Flex>
+        <Flex>{shouldDisplayProfile ? isLoggedIn ? <ProfileIcon /> : <LoginIcon /> : <></>}</Flex>
       </Flex>
     </div>
   );

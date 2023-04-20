@@ -1,5 +1,6 @@
 import { css } from '@emotion/css';
 
+import { inputFocusStyle } from '@styles/inputFocusStyle';
 import { theme } from '@styles/theme';
 
 import useRegister from '@hooks/useRegister';
@@ -20,12 +21,24 @@ const RegisterForm: React.FC = () => {
     <Flex<'form'> as="form" direction="column" onSubmit={onSubmit}>
       <label>닉네임</label>
       <Spacing size={10} />
-      <Input type="text" name="username" value={username} onChange={onChange} />
+      <Input
+        type="text"
+        name="username"
+        value={username}
+        onChange={onChange}
+        className={inputFocusStyle}
+      />
 
       <Spacing size={10} />
       <label>이메일</label>
       <Spacing size={10} />
-      <Input type="text" name="email" value={email} onChange={onChange} />
+      <Input
+        type="text"
+        name="email"
+        value={email}
+        onChange={onChange}
+        className={inputFocusStyle}
+      />
 
       <Spacing size={10} />
       <label>비밀번호</label>
@@ -36,16 +49,23 @@ const RegisterForm: React.FC = () => {
         value={password}
         placeholder="8~16자 영어, 숫자 필수"
         onChange={onChange}
+        className={inputFocusStyle}
       />
 
       <Spacing size={10} />
       <label>비밀번호 확인</label>
       <Spacing size={10} />
-      <Input type="password" name="passwordConfirm" value={passwordConfirm} onChange={onChange} />
+      <Input
+        type="password"
+        name="passwordConfirm"
+        value={passwordConfirm}
+        onChange={onChange}
+        className={inputFocusStyle}
+      />
 
       <Spacing size={20} />
       <div className={buttons}>
-        <Button color="white" border="none" backgroundColor={theme.color.gray700} type="submit">
+        <Button color="white" border="none" backgroundColor={theme.color.orange700} type="submit">
           회원가입
         </Button>
       </div>
