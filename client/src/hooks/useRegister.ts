@@ -14,7 +14,7 @@ import { ModalContext } from '@context/ModalContext';
 import { UserContext } from '@context/UserContext';
 
 export default function useRegister() {
-  const nevigate = useNavigate();
+  const navigate = useNavigate();
   const { closeModal } = useContext(ModalContext);
   const { login } = useContext(UserContext);
   const { mutate: registerMutate } = useRegisterMutation();
@@ -59,7 +59,7 @@ export default function useRegister() {
               login(data);
               toast.success('회원가입이 완료되었습니다');
               closeModal();
-              nevigate('/');
+              navigate('/');
             },
           },
         );
