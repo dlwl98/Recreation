@@ -10,15 +10,16 @@ import { categoriesDisplayString } from '@custom-types/Categories';
 
 import { theme } from '@styles/theme';
 
-import { GetPostResponse } from '@api/getPost';
+import { Post } from '@api/getPosts';
 
 import Flex from '@ds/Flex';
 import Spacing from '@ds/Spacing';
 
-const Post = ({ data }: { data: GetPostResponse }) => {
+const PostHeader = ({ post }: { post: Post }) => {
   const navigate = useNavigate();
+
   return (
-    <div>
+    <>
       <h1>
         <span
           className={css`
@@ -28,9 +29,9 @@ const Post = ({ data }: { data: GetPostResponse }) => {
               color: ${theme.color.orange100};
             }
           `}
-          onClick={() => navigate(`/?filter=${data.post.category}`)}
+          onClick={() => navigate(`/?filter=${post.category}`)}
         >
-          {categoriesDisplayString[data.post.category]}
+          {categoriesDisplayString[post.category]}
         </span>
       </h1>
       <h1
@@ -38,7 +39,7 @@ const Post = ({ data }: { data: GetPostResponse }) => {
           font-size: 2.5rem;
         `}
       >
-        {data.post.title}
+        {post.title}
       </h1>
       <Flex
         align="center"
@@ -48,7 +49,7 @@ const Post = ({ data }: { data: GetPostResponse }) => {
         `}
       >
         <Flex align="center">
-          <div>{data.post.username}</div>
+          <div>{post.username}</div>
           <div
             className={css`
               margin: 0 5px;
@@ -56,7 +57,7 @@ const Post = ({ data }: { data: GetPostResponse }) => {
           >
             ·
           </div>
-          <div>{getCreatedAtString(data.post.createAt)}</div>
+          <div>{getCreatedAtString(post.createAt)}</div>
         </Flex>
         <Flex align="flex-end">
           <VisibilitySvg
@@ -67,7 +68,7 @@ const Post = ({ data }: { data: GetPostResponse }) => {
               margin: 0 2px 0 10px;
             `}
           />
-          {data.post.hits}
+          {post.hits}
           <FavoriteFillSvg
             width="1.2rem"
             height="1.2rem"
@@ -76,7 +77,7 @@ const Post = ({ data }: { data: GetPostResponse }) => {
               margin: 0 2px 0 10px;
             `}
           />
-          {data.post.likes}
+          {post.likes}
         </Flex>
       </Flex>
       <Spacing />
@@ -92,19 +93,10 @@ const Post = ({ data }: { data: GetPostResponse }) => {
           line-height: 1.5rem;
         `}
       >
-        {data.post.detail}
+        {post.detail}
       </div>
-      <Spacing />
-      {data.elements.map((element, i) => (
-        <div key={`element_${i}`}>
-          <div>{i + 1}번</div>
-          <div>문제: {element.quiz}</div>
-          <div>정답: {element.answer}</div>
-          <Spacing />
-        </div>
-      ))}
-    </div>
+    </>
   );
 };
 
-export default Post;
+export default PostHeader;
