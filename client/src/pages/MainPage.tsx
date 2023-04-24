@@ -114,11 +114,11 @@ const MainPage = () => {
             )}
           </Flex>
         </Flex>
-        <Suspense fallback={<SuspenseCards />}>
-          <ErrorBoundary fallback={<Navigate to="/error" />}>
+        <ErrorBoundary fallback={<Navigate to="/error" />}>
+          <Suspense fallback={<SuspenseCards />}>
             <PostsListData option={option} />
-          </ErrorBoundary>
-        </Suspense>
+          </Suspense>
+        </ErrorBoundary>
       </MainLayout>
     </div>
   );
