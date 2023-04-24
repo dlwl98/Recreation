@@ -1,6 +1,6 @@
-import Spacing from '@ds/Spacing';
+import { TemplateProps } from '@components/Post/TemplateProps';
 
-import { TemplateProps } from './TemplateProps';
+import Spacing from '@ds/Spacing';
 
 const KeyValueTemplate: React.FC<TemplateProps> = ({ elements }) => {
   return (
