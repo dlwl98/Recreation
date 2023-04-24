@@ -11,6 +11,7 @@ export const usePostQuery = ({ id }: { id: string }) =>
     },
     {
       staleTime: Infinity,
+      suspense: true,
       onSuccess: (data) => {
         console.log(data);
       },
