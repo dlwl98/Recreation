@@ -10,6 +10,10 @@ type PostLoginReqBody = {
   password: string;
 };
 
+const getRandomNumber = (min: number, max: number) => {
+  return Math.random() * (max - min) + min;
+};
+
 export const mockposts: Post[] = Array.from({ length: 100 }).map((_, i) => {
   const categories: Categories[] = ['choseong', '4word', 'sokdam'];
   return {
@@ -78,6 +82,7 @@ export const handlers = [
     }
 
     return res(
+      ctx.delay(getRandomNumber(100, 500)),
       ctx.status(200),
       ctx.json({
         posts: resultPosts,
@@ -90,6 +95,7 @@ export const handlers = [
     const id = (params.id as string).substring(1);
 
     return res(
+      ctx.delay(getRandomNumber(100, 500)),
       ctx.status(200),
       ctx.json(
         mockPostResponses.find((mockPostResponse) => mockPostResponse.post.id === Number(id)),
@@ -99,6 +105,7 @@ export const handlers = [
 
   rest.post<PostLoginReqBody>('/api/login', async (req, res, ctx) => {
     return res(
+      ctx.delay(getRandomNumber(100, 500)),
       ctx.status(200),
       ctx.json({
         username: 'aaaa1111',
@@ -116,6 +123,7 @@ export const handlers = [
       return res(ctx.status(400));
     }
     return res(
+      ctx.delay(getRandomNumber(100, 500)),
       ctx.status(200),
       ctx.json({
         accessToken: 'qwerqwer12341234',
