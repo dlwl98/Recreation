@@ -1,7 +1,7 @@
 import { css, cx } from '@emotion/css';
 import { useNavigate } from 'react-router-dom';
 
-import { ReactComponent as FavoriteSvg } from '@assets/favorite_fill.svg';
+import { ReactComponent as FavoriteFillSvg } from '@assets/favorite_fill.svg';
 import { ReactComponent as VisibilitySvg } from '@assets/visibility.svg';
 
 import { getCreatedAtString } from '@utils/getCreatedAtString';
@@ -77,7 +77,7 @@ const Card: React.FC<Props> = ({ className, card }) => {
                 `}
               />
               <div className={marginRight10px}>{hits}</div>
-              <FavoriteSvg
+              <FavoriteFillSvg
                 width="1.2rem"
                 height="1.2rem"
                 fill={theme.color.gray700}
