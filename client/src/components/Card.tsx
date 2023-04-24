@@ -1,6 +1,9 @@
 import { css, cx } from '@emotion/css';
 import { useNavigate } from 'react-router-dom';
 
+import { ReactComponent as FavoriteSvg } from '@assets/favorite_fill.svg';
+import { ReactComponent as VisibilitySvg } from '@assets/visibility.svg';
+
 import { getCreatedAtString } from '@utils/getCreatedAtString';
 
 import { categoriesDisplayString } from '@custom-types/Categories';
@@ -8,8 +11,6 @@ import { categoriesDisplayString } from '@custom-types/Categories';
 import { theme } from '@styles/theme';
 
 import { Post } from '@api/getPosts';
-
-import Icon from '@components/Icon';
 
 import Flex from '@ds/Flex';
 import Spacing from '@ds/Spacing';
@@ -67,21 +68,19 @@ const Card: React.FC<Props> = ({ className, card }) => {
           </Flex>
           <Flex align="center">
             <Flex className={marginRight10px} align="flex-end">
-              <Icon
-                name="visibility"
-                fill={0}
-                size="1.2rem"
-                color={theme.color.gray700}
+              <VisibilitySvg
+                width="1.2rem"
+                height="1.2rem"
+                fill={theme.color.gray700}
                 className={css`
                   margin-right: 2px;
                 `}
               />
               <div className={marginRight10px}>{hits}</div>
-              <Icon
-                name="favorite"
-                fill={1}
-                size="1.2rem"
-                color={theme.color.gray700}
+              <FavoriteSvg
+                width="1.2rem"
+                height="1.2rem"
+                fill={theme.color.gray700}
                 className={css`
                   margin-right: 2px;
                 `}

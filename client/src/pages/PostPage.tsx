@@ -1,6 +1,9 @@
 import { css } from '@emotion/css';
 import { useNavigate, useParams } from 'react-router-dom';
 
+import { ReactComponent as FavoriteSvg } from '@assets/favorite_fill.svg';
+import { ReactComponent as VisibilitySvg } from '@assets/visibility.svg';
+
 import { getCreatedAtString } from '@utils/getCreatedAtString';
 
 import { categoriesDisplayString } from '@custom-types/Categories';
@@ -12,7 +15,6 @@ import { usePostQuery } from '@hooks/usePostQuery';
 import PostLayout from '@layouts/PostLayout';
 
 import Header from '@components/Header';
-import Icon from '@components/Icon';
 
 import Flex from '@ds/Flex';
 import Spacing from '@ds/Spacing';
@@ -73,21 +75,19 @@ const PostPage = () => {
                 <div>{getCreatedAtString(data.post.createAt)}</div>
               </Flex>
               <Flex align="flex-end">
-                <Icon
-                  name="visibility"
-                  fill={0}
-                  size="1.2rem"
-                  color={theme.color.gray700}
+                <VisibilitySvg
+                  width="1.2rem"
+                  height="1.2rem"
+                  fill={theme.color.gray700}
                   className={css`
-                    margin-right: 2px;
+                    margin: 0 2px 0 10px;
                   `}
                 />
                 {data.post.hits}
-                <Icon
-                  name="favorite"
-                  fill={1}
-                  size="1.2rem"
-                  color={theme.color.gray700}
+                <FavoriteSvg
+                  width="1.2rem"
+                  height="1.2rem"
+                  fill={theme.color.gray700}
                   className={css`
                     margin: 0 2px 0 10px;
                   `}
