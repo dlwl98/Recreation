@@ -70,7 +70,7 @@ export const GameContextProvider: React.FC<GameProviderProps> = ({ children }) =
 
   const guess = (userTyped: string) => {
     if (gameStatus !== 'preceeding') return;
-    if (userTyped === elements[currentElementIndex].answer) {
+    if (userTyped.replace(/ /g, '') === elements[currentElementIndex].answer.replace(/ /g, '')) {
       clearTimeout(timer);
       setCurrentElementIndex((state) => state + 1);
       setDeathCount(gameOption.deathCount);
