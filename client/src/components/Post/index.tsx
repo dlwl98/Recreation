@@ -13,7 +13,7 @@ const Post = ({ data }: { data: GetPostResponse }) => {
   return (
     <div>
       <PostHeader post={post} />
-      <Spacing size={100} />
+      <Spacing size={40} />
       <Template category={category} elements={elements} />
     </div>
   );

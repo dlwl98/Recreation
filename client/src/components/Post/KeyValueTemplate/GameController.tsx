@@ -66,7 +66,7 @@ const GameController = () => {
     <Flex direction="column" align="center">
       {gameStatus === 'preceeding' ? (
         <Flex direction="column">
-          <div className={cssFontSize(5)}>{elements[currentElementIndex]?.quiz}</div>
+          <h1 className={cssFontSize(5)}>{elements[currentElementIndex]?.quiz}</h1>
           <Spacing />
           <Flex
             align="center"
@@ -83,11 +83,14 @@ const GameController = () => {
             />
             <Button
               color={theme.color.gray700}
-              border={`1px solid ${theme.color.orange700}`}
+              border={`1px solid ${theme.color.gray700}`}
               onClick={handleGame}
               className={css`
                 margin-left: 10px;
                 width: 100px;
+                :hover {
+                  border-color: ${theme.color.orange700};
+                }
               `}
             >
               제출

@@ -1,3 +1,4 @@
+import { css } from '@emotion/css';
 import { useContext, useRef } from 'react';
 
 import { theme } from '@styles/theme';
@@ -37,8 +38,13 @@ const TemplateInner: React.FC<TemplateProps> = ({ category, elements }) => {
           <Spacing />
           <Button
             color={theme.color.gray700}
-            border={`1px solid ${theme.color.orange700}`}
+            border={`1px solid ${theme.color.gray700}`}
             onClick={start}
+            className={css`
+              :hover {
+                border-color: ${theme.color.orange700};
+              }
+            `}
           >
             설정완료
           </Button>
