@@ -1,5 +1,4 @@
-import { useState } from 'react';
-import { useContext } from 'react';
+import { useContext, useState } from 'react';
 import { toast } from 'react-hot-toast';
 import { useNavigate } from 'react-router-dom';
 
@@ -8,13 +7,12 @@ import { isEmailFormat, isPasswordFormat } from '@utils/index';
 import { ErrorWithMessage } from '@custom-types/error';
 
 import { useLoginMutation } from '@hooks/useLoginMutation';
-import { useReactCookie } from '@hooks/useReactCookie';
 
 import { ModalContext } from '@context/ModalContext';
 import { UserContext } from '@context/UserContext';
 
 export default function useLogin() {
-  const nevigate = useNavigate();
+  const navigate = useNavigate();
   const { closeModal } = useContext(ModalContext);
   const { login } = useContext(UserContext);
   const { mutate: loginMutate } = useLoginMutation();
@@ -46,7 +44,7 @@ export default function useLogin() {
               login(data);
               toast.success('로그인이 완료되었습니다');
               closeModal();
-              nevigate('/');
+              navigate('/');
             },
           },
         );

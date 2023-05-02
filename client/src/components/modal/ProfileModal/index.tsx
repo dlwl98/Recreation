@@ -16,6 +16,7 @@ const ProfileModal: React.FC<ModalProps> = ({ closeModal }) => {
     <ModalOuter
       onClick={closeModal}
       className={css`
+        position: absolute;
         justify-content: flex-end;
       `}
     >

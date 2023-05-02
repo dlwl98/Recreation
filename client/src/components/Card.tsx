@@ -1,4 +1,8 @@
-import { css } from '@emotion/css';
+import { css, cx } from '@emotion/css';
+import { useNavigate } from 'react-router-dom';
+
+import { ReactComponent as FavoriteFillSvg } from '@assets/favorite_fill.svg';
+import { ReactComponent as VisibilitySvg } from '@assets/visibility.svg';
 
 import { getCreatedAtString } from '@utils/getCreatedAtString';
 
@@ -11,27 +15,44 @@ import { Post } from '@api/getPosts';
 import Flex from '@ds/Flex';
 import Spacing from '@ds/Spacing';
 
-import Icon from './Icon';
-
 type Props = {
   className: string;
   card: Post;
 };
 
 const Card: React.FC<Props> = ({ className, card }) => {
-  const { title, detail, username, createAt, likes, hits, category } = card;
+  const { id, title, detail, username, createAt, likes, hits, category } = card;
   const createdAtString = getCreatedAtString(createAt);
+  const navigate = useNavigate();
+
   return (
     <div className={className}>
       <Flex
         direction="column"
+        onClick={() => navigate(`/post/${id}`)}
         className={css`
           margin: 10px;
           padding: 10px;
           background-color: ${theme.color.gray100};
           border-radius: 5px;
+          border: 2px solid ${theme.color.gray100};
+          cursor: pointer;
+          :hover {
+            border: 2px solid ${theme.color.orange700};
+          }
         `}
       >
+        <div
+          className={cx(
+            marginRight10px,
+            css`
+              font-weight: 800;
+              color: ${theme.color.orange700};
+            `,
+          )}
+        >
+          {categoriesDisplayString[category]}
+        </div>
         <h3 className={cardTitleStyle}>{title}</h3>
         <div className={cardDetailStyle}>{detail}</div>
         <Spacing size={30} />
@@ -47,21 +68,19 @@ const Card: React.FC<Props> = ({ className, card }) => {
           </Flex>
           <Flex align="center">
             <Flex className={marginRight10px} align="flex-end">
-              <Icon
-                name="visibility"
-                fill={0}
-                size="1.2rem"
-                color={theme.color.gray700}
+              <VisibilitySvg
+                width="1.2rem"
+                height="1.2rem"
+                fill={theme.color.gray700}
                 className={css`
                   margin-right: 2px;
                 `}
               />
               <div className={marginRight10px}>{hits}</div>
-              <Icon
-                name="favorite"
-                fill={1}
-                size="1.2rem"
-                color={theme.color.gray700}
+              <FavoriteFillSvg
+                width="1.2rem"
+                height="1.2rem"
+                fill={theme.color.gray700}
                 className={css`
                   margin-right: 2px;
                 `}
@@ -71,8 +90,6 @@ const Card: React.FC<Props> = ({ className, card }) => {
           </Flex>
         </Flex>
         <Spacing />
-
-        <div className={marginRight10px}>{categoriesDisplayString[category]}</div>
       </Flex>
     </div>
   );

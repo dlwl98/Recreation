@@ -8,14 +8,13 @@ import { isEmailFormat, isPasswordFormat } from '@utils/index';
 import { ErrorWithMessage } from '@custom-types/error';
 
 import { useReactCookie } from '@hooks/useReactCookie';
+import { useRegisterMutation } from '@hooks/useRegisterMutation';
 
 import { ModalContext } from '@context/ModalContext';
 import { UserContext } from '@context/UserContext';
 
-import { useRegisterMutation } from './useRegisterMutation';
-
 export default function useRegister() {
-  const nevigate = useNavigate();
+  const navigate = useNavigate();
   const { closeModal } = useContext(ModalContext);
   const { login } = useContext(UserContext);
   const { mutate: registerMutate } = useRegisterMutation();
@@ -60,7 +59,7 @@ export default function useRegister() {
               login(data);
               toast.success('회원가입이 완료되었습니다');
               closeModal();
-              nevigate('/');
+              navigate('/');
             },
           },
         );
