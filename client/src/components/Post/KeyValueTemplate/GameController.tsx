@@ -64,30 +64,6 @@ const GameController = () => {
 
   return (
     <Flex direction="column" align="center">
-      {gameAlert.type === 'success' ? (
-        <h1 className={cx(greenAlert, cssFontSize(3))}>정답!</h1>
-      ) : (
-        <></>
-      )}
-      {gameAlert.type === 'tryagain' ? (
-        <h1 className={cx(redAlert, cssFontSize(3))}>틀렸습니다..</h1>
-      ) : (
-        <></>
-      )}
-      {gameAlert.type === 'fail' ? (
-        category === 'choseong' ? (
-          <h1 className={cx(redAlert, cssFontSize(3))}>
-            실패! 정답은 {elements[currentElementIndex - 1].answer}
-          </h1>
-        ) : (
-          <h1 className={cx(redAlert, cssFontSize(3))}>
-            실패! 정답은{' '}
-            {elements[currentElementIndex - 1].quiz + elements[currentElementIndex - 1].answer}
-          </h1>
-        )
-      ) : (
-        <></>
-      )}
       {gameStatus === 'preceeding' ? (
         <Flex direction="column">
           <div className={cssFontSize(5)}>{elements[currentElementIndex]?.quiz}</div>
@@ -124,6 +100,30 @@ const GameController = () => {
       )}
       {gameStatus === 'finished' ? <h1 className={cssFontSize(5)}>엔터시 다시시작</h1> : <></>}
       {gameStatus === 'paused' ? <h1 className={cssFontSize(5)}>엔터시 다음문제</h1> : <></>}
+      {gameAlert.type === 'success' ? (
+        <h1 className={cx(greenAlert, cssFontSize(3))}>정답!</h1>
+      ) : (
+        <></>
+      )}
+      {gameAlert.type === 'tryagain' ? (
+        <h1 className={cx(redAlert, cssFontSize(3))}>틀렸습니다..</h1>
+      ) : (
+        <></>
+      )}
+      {gameAlert.type === 'fail' ? (
+        category === 'choseong' ? (
+          <h1 className={cx(redAlert, cssFontSize(3))}>
+            실패! 정답은 {elements[currentElementIndex - 1].answer}
+          </h1>
+        ) : (
+          <h1 className={cx(redAlert, cssFontSize(3))}>
+            실패! 정답은{' '}
+            {elements[currentElementIndex - 1].quiz + elements[currentElementIndex - 1].answer}
+          </h1>
+        )
+      ) : (
+        <></>
+      )}
     </Flex>
   );
 };
