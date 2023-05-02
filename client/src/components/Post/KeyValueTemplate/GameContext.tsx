@@ -1,17 +1,30 @@
 import { createContext, useState } from 'react';
-import { toast } from 'react-hot-toast';
 
 import { shuffleArray } from '@utils/shuffle';
 
+import { Categories } from '@custom-types/Categories';
+
 import { PostElement } from '@api/getPost';
 
+export type Feedback = 'no' | 'success' | 'fail' | 'tryagain';
+export type GameAlert = {
+  type: Feedback;
+  alertColor: string;
+};
 export type GameStatus = 'notinit' | 'paused' | 'preceeding' | 'finished';
 
 export type GameContextType = {
   gameStatus: GameStatus;
+  gameAlert: GameAlert;
+  category: Categories;
   elements: PostElement[];
   currentElementIndex: number;
-  setGame: (elements: PostElement[], deathCount: number, timeout: number) => void;
+  setGame: (
+    category: Categories,
+    elements: PostElement[],
+    deathCount: number,
+    timeout: number,
+  ) => void;
   gameover: () => void;
   resumeAndStartTimer: () => number;
   guess: (userTyped: string) => void;
@@ -19,6 +32,8 @@ export type GameContextType = {
 
 export const GameContext = createContext<GameContextType>({
   gameStatus: 'notinit',
+  gameAlert: { type: 'no', alertColor: 'black' },
+  category: '4word',
   elements: [],
   currentElementIndex: 0,
   gameover: () => {},
@@ -34,25 +49,34 @@ type GameProviderProps = {
 export const GameContextProvider: React.FC<GameProviderProps> = ({ children }) => {
   const [gameOption, setGameOption] = useState({ deathCount: 1, timeout: 10000 });
   const [gameStatus, setGameStatus] = useState<GameStatus>('notinit');
+  const [gameAlert, setGameAlert] = useState<GameAlert>({ type: 'no', alertColor: 'black' });
+  const [category, setCategory] = useState<Categories>('4word');
   const [elements, setElements] = useState<PostElement[]>([]);
   const [currentElementIndex, setCurrentElementIndex] = useState(0);
   const [deathCount, setDeathCount] = useState(1);
   const [timer, setTimer] = useState(0);
 
-  const setGame = (elements: PostElement[], deathCount: number, timeout: number) => {
+  const setGame = (
+    category: Categories,
+    elements: PostElement[],
+    deathCount: number,
+    timeout: number,
+  ) => {
     setGameOption({ deathCount, timeout });
     setDeathCount(deathCount);
     setGameStatus('paused');
     setCurrentElementIndex(0);
     shuffleArray(elements);
+    setCategory(category);
+    setGameAlert({ type: 'no', alertColor: 'black' });
     setElements(elements);
   };
 
   const timeover = () => {
     setCurrentElementIndex((state) => state + 1);
     setDeathCount(gameOption.deathCount);
-    toast.error(`시간초과! 정답은 "${elements[currentElementIndex].answer}"`);
     setGameStatus('paused');
+    setGameAlert({ type: 'fail', alertColor: 'red' });
     if (currentElementIndex + 1 >= elements.length) {
       setGameStatus('finished');
     }
@@ -65,6 +89,7 @@ export const GameContextProvider: React.FC<GameProviderProps> = ({ children }) =
   const resumeAndStartTimer = () => {
     setTimer(setTimeout(timeover, gameOption.timeout));
     setGameStatus('preceeding');
+    setGameAlert({ type: 'no', alertColor: 'black' });
     return Date.now() + gameOption.timeout;
   };
 
@@ -74,8 +99,8 @@ export const GameContextProvider: React.FC<GameProviderProps> = ({ children }) =
       clearTimeout(timer);
       setCurrentElementIndex((state) => state + 1);
       setDeathCount(gameOption.deathCount);
-      toast.success('정답');
       setGameStatus('paused');
+      setGameAlert({ type: 'success', alertColor: 'green' });
       if (currentElementIndex + 1 >= elements.length) {
         setGameStatus('finished');
         return;
@@ -86,15 +111,15 @@ export const GameContextProvider: React.FC<GameProviderProps> = ({ children }) =
       clearTimeout(timer);
       setCurrentElementIndex((state) => state + 1);
       setDeathCount(gameOption.deathCount);
-      toast.error(`실패! 정답은 "${elements[currentElementIndex].answer}"`);
       setGameStatus('paused');
+      setGameAlert({ type: 'fail', alertColor: 'red' });
       if (currentElementIndex + 1 >= elements.length) {
         setGameStatus('finished');
         return;
       }
       return;
     }
-    toast.error('틀렸습니다');
+    setGameAlert({ type: 'tryagain', alertColor: 'red' });
     setDeathCount(deathCount - 1);
   };
 
@@ -102,6 +127,8 @@ export const GameContextProvider: React.FC<GameProviderProps> = ({ children }) =
     <GameContext.Provider
       value={{
         gameStatus,
+        gameAlert,
+        category,
         elements,
         currentElementIndex,
         setGame,

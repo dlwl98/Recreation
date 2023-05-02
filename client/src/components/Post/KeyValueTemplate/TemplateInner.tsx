@@ -11,13 +11,14 @@ import { TemplateProps } from '../TemplateProps';
 import { GameContext } from './GameContext';
 import GameController from './GameController';
 
-const TemplateInner: React.FC<TemplateProps> = ({ elements }) => {
+const TemplateInner: React.FC<TemplateProps> = ({ category, elements }) => {
   const { gameStatus, setGame } = useContext(GameContext);
   const deathCountRef = useRef<HTMLInputElement>(null);
   const secRef = useRef<HTMLInputElement>(null);
 
   const start = () => {
     setGame(
+      category,
       elements,
       Number(deathCountRef.current?.value) || 1,
       Number(secRef.current?.value) * 1000 || 10000,
