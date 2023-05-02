@@ -1,12 +1,12 @@
 import { css } from '@emotion/css';
 import { useState } from 'react';
 
+import { ReactComponent as SearchIcon } from '@assets/search.svg';
+
 import { inputFocusStyle } from '@styles/inputFocusStyle';
 import { theme } from '@styles/theme';
 
 import usePostsOption from '@hooks/usePostsOption';
-
-import Icon from '@components/Icon';
 
 import ContentMargin from '@ds/ContentMargin';
 import Flex from '@ds/Flex';
@@ -26,7 +26,7 @@ const SearchBar = () => {
         />
         <ContentMargin size="5px" />
         <div className={searchButtonStyle} onClick={() => setSearch(inputString)}>
-          <Icon name="search" fill={0} size="2rem" color={theme.color.gray700} />
+          <SearchIcon width="2rem" height="2rem" fill={theme.color.gray700} />
         </div>
       </Flex>
     </div>

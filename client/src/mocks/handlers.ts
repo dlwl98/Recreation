@@ -2,11 +2,16 @@ import { rest } from 'msw';
 
 import { Categories } from '@custom-types/Categories';
 
+import { GetPostResponse, PostElement } from '@api/getPost';
 import { GetPostsOptions, Post } from '@api/getPosts';
 
 type PostLoginReqBody = {
   email: string;
   password: string;
+};
+
+const getRandomNumber = (min: number, max: number) => {
+  return Math.random() * (max - min) + min;
 };
 
 export const mockposts: Post[] = Array.from({ length: 100 }).map((_, i) => {
@@ -25,6 +30,29 @@ export const mockposts: Post[] = Array.from({ length: 100 }).map((_, i) => {
     hits: 100 + i * 10,
     category: categories[i % 3],
   };
+});
+
+export const mockPostResponses: GetPostResponse[] = mockposts.map((post) => {
+  const elements = [];
+  if (post.category === 'choseong') {
+    elements.push({ quiz: 'ㄱㄹ', answer: '가렌' });
+    elements.push({ quiz: 'ㅋㅈㅅ', answer: '카직스' });
+    elements.push({ quiz: 'ㅇㅍㄹㅇㅅ', answer: '아펠리오스' });
+    elements.push({ quiz: 'ㄴㄴㅇ ㅇㄹㅍ', answer: '누누와 윌럼프' });
+  }
+
+  if (post.category === '4word') {
+    elements.push({ quiz: '온고', answer: '지신' });
+    elements.push({ quiz: '장유', answer: '유서' });
+    elements.push({ quiz: '동귀', answer: '어진' });
+  }
+  if (post.category === 'sokdam') {
+    elements.push({ quiz: '호랑이도', answer: '제 말하면 온다' });
+    elements.push({ quiz: '물이 깊어야', answer: '고기가 모인다' });
+    elements.push({ quiz: '개구리', answer: '올챙이 적 생각 못한다' });
+    elements.push({ quiz: '빈대 잡으려고', answer: '초가삼간 태운다' });
+  }
+  return { post, elements };
 });
 
 export const handlers = [
@@ -54,6 +82,7 @@ export const handlers = [
     }
 
     return res(
+      ctx.delay(getRandomNumber(100, 500)),
       ctx.status(200),
       ctx.json({
         posts: resultPosts,
@@ -61,8 +90,22 @@ export const handlers = [
     );
   }),
 
-  rest.post<PostLoginReqBody>('api/login', async (req, res, ctx) => {
+  rest.get('/api/post/:id', (req, res, ctx) => {
+    const params = req.params;
+    const id = (params.id as string).substring(1);
+
     return res(
+      ctx.delay(getRandomNumber(100, 500)),
+      ctx.status(200),
+      ctx.json(
+        mockPostResponses.find((mockPostResponse) => mockPostResponse.post.id === Number(id)),
+      ),
+    );
+  }),
+
+  rest.post<PostLoginReqBody>('/api/login', async (req, res, ctx) => {
+    return res(
+      ctx.delay(getRandomNumber(100, 500)),
       ctx.status(200),
       ctx.json({
         username: 'aaaa1111',
@@ -80,6 +123,7 @@ export const handlers = [
       return res(ctx.status(400));
     }
     return res(
+      ctx.delay(getRandomNumber(100, 500)),
       ctx.status(200),
       ctx.json({
         accessToken: 'qwerqwer12341234',

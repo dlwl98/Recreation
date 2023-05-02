@@ -19,23 +19,27 @@ const queryClient = new QueryClient({
   },
 });
 
-if (import.meta.env.MODE === 'development') {
-  const { worker } = await import('./mocks/worker');
-  worker.start();
-}
+const prepareWorker = async () => {
+  if (import.meta.env.MODE === 'development' || import.meta.env.MODE === 'production') {
+    const { worker } = await import('./mocks/worker');
+    worker.start();
+  }
+};
 
-ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
-  <React.StrictMode>
-    <QueryClientProvider client={queryClient}>
-      <UserContextProvider>
-        <ModalContextProvider>
-          <GlobalStyles />
-          <BrowserRouter>
-            <Toaster />
-            <App />
-          </BrowserRouter>
-        </ModalContextProvider>
-      </UserContextProvider>
-    </QueryClientProvider>
-  </React.StrictMode>,
+prepareWorker().then(() =>
+  ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
+    <React.StrictMode>
+      <QueryClientProvider client={queryClient}>
+        <UserContextProvider>
+          <ModalContextProvider>
+            <GlobalStyles />
+            <BrowserRouter>
+              <Toaster />
+              <App />
+            </BrowserRouter>
+          </ModalContextProvider>
+        </UserContextProvider>
+      </QueryClientProvider>
+    </React.StrictMode>,
+  ),
 );

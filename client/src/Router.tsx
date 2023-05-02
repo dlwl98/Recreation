@@ -4,6 +4,7 @@ import ModalRoute from '@utils/ModalRoute';
 
 import ErrorPage from '@pages/ErrorPage';
 import MainPage from '@pages/MainPage';
+import PostPage from '@pages/PostPage';
 import WritePage from '@pages/WritePage';
 
 const Router = () => {
@@ -11,6 +12,7 @@ const Router = () => {
     <Routes>
       <Route element={<ModalRoute />}>
         <Route path="/" element={<MainPage />} />
+        <Route path="/post/:id" element={<PostPage />} />
         <Route path="/write" element={<WritePage />} />
         <Route path="/error" element={<ErrorPage />} />
         <Route path="*" element={<ErrorPage />} />

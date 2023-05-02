@@ -1,6 +1,6 @@
 import { Categories } from '@custom-types/Categories';
 
-import axiosInstance from './axiosInstance';
+import axiosInstance from '@api/axiosInstance';
 
 export type PostOrder = 'newest' | 'popularity';
 
