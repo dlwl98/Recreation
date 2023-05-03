@@ -26,12 +26,10 @@ export type GetPostsResponse = {
 };
 
 export const getPosts = async (option: GetPostsOptions) => {
-  const filterParam = `filter=${option.filter}`;
-  const orderParam = `order=${option.order}`;
-  const searchParam = `search=${option.search}`;
+  const { filter, order, search } = option;
 
-  const response = await axiosInstance.get<GetPostsResponse>(
-    '/posts/?' + filterParam + '&' + orderParam + '&' + searchParam,
-  );
+  const response = await axiosInstance.get<GetPostsResponse>('/posts', {
+    params: { filter, order, search },
+  });
   return response.data;
 };
