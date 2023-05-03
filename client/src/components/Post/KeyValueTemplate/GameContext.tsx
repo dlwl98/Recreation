@@ -107,7 +107,7 @@ export const GameContextProvider: React.FC<GameProviderProps> = ({ children }) =
       }
       return;
     }
-    if (deathCount === 1) {
+    if (deathCount <= 1) {
       clearTimeout(timer);
       setCurrentElementIndex((state) => state + 1);
       setDeathCount(gameOption.deathCount);
