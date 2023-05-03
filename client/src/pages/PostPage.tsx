@@ -18,7 +18,7 @@ type PostPageParams = {
 };
 
 const PostPage = () => {
-  const { id } = useParams() as PostPageParams;
+  const { id } = useParams();
 
   return (
     <div>
@@ -27,7 +27,7 @@ const PostPage = () => {
       <PostLayout>
         <ErrorBoundary fallback={<Navigate to="/error" />}>
           <Suspense fallback={<div />}>
-            <PostData id={id} component={Post} />
+            <PostData id={id!} component={Post} />
           </Suspense>
         </ErrorBoundary>
       </PostLayout>
