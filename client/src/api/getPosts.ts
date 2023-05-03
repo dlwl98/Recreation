@@ -24,7 +24,7 @@ export type GetPostsOptions = {
 
 export type GetPostsResponse = {
   posts: Post[];
-  nextCursor: number;
+  nextPage: number;
 };
 
 export const getPosts = async (option: GetPostsOptions) => {

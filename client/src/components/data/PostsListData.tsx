@@ -26,7 +26,7 @@ const PostsListData = ({ option }: { option: GetPostsOptions }) => {
   return (
     <>
       {data!.pages.map((page) => (
-        <Cards key={`cards-${page.nextCursor}`} width={400} cards={page.posts} />
+        <Cards key={`cards-${page.nextPage}`} width={400} cards={page.posts} />
       ))}
       {isFetchingNextPage && <SuspenseCards />}
     </>

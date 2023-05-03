@@ -88,7 +88,7 @@ export const handlers = [
       ctx.status(200),
       ctx.json({
         posts: resultPosts.slice(page * 30, (page + 1) * 30),
-        nextCursor: page + 1,
+        nextPage: page + 1,
       }),
     );
   }),
