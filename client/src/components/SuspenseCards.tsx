@@ -13,7 +13,7 @@ const SuspenseCards = () => {
 
   return (
     <Flex className={style}>
-      {mockposts.map((card) => (
+      {mockposts.slice(0, 30).map((card) => (
         <Card
           key={card.id}
           className={css`

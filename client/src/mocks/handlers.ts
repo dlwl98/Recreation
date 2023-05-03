@@ -14,7 +14,7 @@ const getRandomNumber = (min: number, max: number) => {
   return Math.random() * (max - min) + min;
 };
 
-export const mockposts: Post[] = Array.from({ length: 100 }).map((_, i) => {
+export const mockposts: Post[] = Array.from({ length: 1000 }).map((_, i) => {
   const categories: Categories[] = ['choseong', '4word', 'sokdam'];
   return {
     id: i + 1,
@@ -60,6 +60,7 @@ export const handlers = [
     const filter = req.url.searchParams.get('filter');
     const order = req.url.searchParams.get('order');
     const search = req.url.searchParams.get('search') || '';
+    const pageParam = req.url.searchParams.get('pageParam') || '0';
 
     let resultPosts = mockposts;
 
@@ -80,12 +81,14 @@ export const handlers = [
         (post) => post.title.includes(search) || post.detail.includes(search),
       );
     }
+    const page = Number(pageParam);
 
     return res(
       ctx.delay(getRandomNumber(100, 500)),
       ctx.status(200),
       ctx.json({
-        posts: resultPosts,
+        posts: resultPosts.slice(page * 30, (page + 1) * 30),
+        nextCursor: page + 1,
       }),
     );
   }),
