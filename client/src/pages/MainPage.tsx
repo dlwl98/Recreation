@@ -12,10 +12,9 @@ import { GetPostsOptions } from '@api/getPosts';
 
 import usePostsOption from '@hooks/usePostsOption';
 
-import { UserContext } from '@context/UserContext';
-
 import MainLayout from '@layouts/MainLayout';
 
+import AuthWrapper from '@components/AuthWrapper';
 import Header from '@components/Header';
 import SearchBar from '@components/SearchBar';
 import SuspenseCards from '@components/SuspenseCards';
@@ -28,7 +27,6 @@ import Spacing from '@ds/Spacing';
 const MainPage = () => {
   const { option, setFilter, setOrder } = usePostsOption();
   const navigate = useNavigate();
-  const { isLoggedIn } = useContext(UserContext);
 
   return (
     <div>
@@ -93,7 +91,7 @@ const MainPage = () => {
             `}
           >
             <SearchBar />
-            {isLoggedIn ? (
+            <AuthWrapper fallback={<span className={marginRight10px} />}>
               <Button
                 color={theme.color.orange700}
                 border="none"
@@ -109,9 +107,7 @@ const MainPage = () => {
               >
                 글쓰기
               </Button>
-            ) : (
-              <span className={marginRight10px} />
-            )}
+            </AuthWrapper>
           </Flex>
         </Flex>
         <ErrorBoundary fallback={<Navigate to="/error" />}>

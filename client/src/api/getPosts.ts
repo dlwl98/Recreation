@@ -19,19 +19,19 @@ export type GetPostsOptions = {
   filter: 'all' | Categories;
   order: PostOrder;
   search: string;
+  pageParam: number;
 };
 
 export type GetPostsResponse = {
   posts: Post[];
+  nextPage: number;
 };
 
 export const getPosts = async (option: GetPostsOptions) => {
-  const filterParam = `filter=${option.filter}`;
-  const orderParam = `order=${option.order}`;
-  const searchParam = `search=${option.search}`;
+  const { filter, order, search, pageParam } = option;
 
-  const response = await axiosInstance.get<GetPostsResponse>(
-    '/posts/?' + filterParam + '&' + orderParam + '&' + searchParam,
-  );
+  const response = await axiosInstance.get<GetPostsResponse>('/posts', {
+    params: { filter, order, search, pageParam },
+  });
   return response.data;
 };
