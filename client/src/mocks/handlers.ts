@@ -2,7 +2,7 @@ import { rest } from 'msw';
 
 import { Categories } from '@custom-types/Categories';
 
-import { GetPostResponse, PostElement } from '@api/getPost';
+import { GetPostResponse } from '@api/getPost';
 import { GetPostsOptions, Post } from '@api/getPosts';
 
 type PostLoginReqBody = {
@@ -60,7 +60,8 @@ export const handlers = [
     const filter = req.url.searchParams.get('filter');
     const order = req.url.searchParams.get('order');
     const search = req.url.searchParams.get('search') || '';
-    const pageParam = req.url.searchParams.get('pageParam') || '0';
+    const page = Number(req.url.searchParams.get('page')) || 0;
+    const size = Number(req.url.searchParams.get('size')) || 10;
 
     let resultPosts = mockposts;
 
@@ -81,14 +82,14 @@ export const handlers = [
         (post) => post.title.includes(search) || post.detail.includes(search),
       );
     }
-    const page = Number(pageParam);
 
     return res(
       ctx.delay(getRandomNumber(100, 500)),
       ctx.status(200),
       ctx.json({
-        posts: resultPosts.slice(page * 30, (page + 1) * 30),
+        posts: resultPosts.slice(page * size, (page + 1) * size),
         nextPage: page + 1,
+        hasNextPage: resultPosts.length / size > page,
       }),
     );
   }),

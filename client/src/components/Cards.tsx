@@ -8,24 +8,11 @@ import Card from '@components/Card';
 import Flex from '@ds/Flex';
 
 type Props = {
-  width: number;
+  standard: number;
   cards: Post[];
 };
 
-const Cards: React.FC<Props> = ({ width, cards }) => {
-  const [standard, setStandard] = useState(Math.floor(window.innerWidth / width));
-
-  const handleResize = () => {
-    setStandard(Math.floor(window.innerWidth / width));
-  };
-
-  useEffect(() => {
-    window.addEventListener('resize', handleResize);
-    return () => {
-      window.removeEventListener('resize', handleResize);
-    };
-  }, []);
-
+const Cards: React.FC<Props> = ({ standard, cards }) => {
   return (
     <Flex className={style}>
       {cards.map((card) => (

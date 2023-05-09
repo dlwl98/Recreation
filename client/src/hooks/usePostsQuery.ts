@@ -7,10 +7,10 @@ export const usePostsQuery = (option: GetPostsOptions) =>
   useInfiniteQuery<GetPostsResponse, AxiosError>(
     ['get-posts', option],
     ({ pageParam }) => {
-      return getPosts({ ...option, pageParam });
+      return getPosts({ ...option, page: pageParam });
     },
     {
-      getNextPageParam: (lastPage) => lastPage.nextPage,
+      getNextPageParam: (lastPage) => (lastPage.hasNextPage ? lastPage.nextPage : undefined),
       staleTime: 10000,
       suspense: true,
       onSuccess: (data) => {

@@ -24,7 +24,6 @@ const GameController = () => {
     guess,
   } = useContext(GameContext);
   const input = useRef<HTMLInputElement>(null);
-  const alert = useRef<HTMLHeadingElement>(null);
   const [timer, setTimer] = useState(Date.now());
 
   const handleGame = () => {

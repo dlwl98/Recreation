@@ -8,12 +8,12 @@ import Flex from '@ds/Flex';
 
 import { mockposts } from '../mocks/handlers';
 
-const SuspenseCards = () => {
+const SuspenseCards = ({ size }: { size: number }) => {
   const width = Math.floor(window.innerWidth / 400);
 
   return (
     <Flex className={style}>
-      {mockposts.slice(0, 30).map((card) => (
+      {mockposts.slice(0, size).map((card) => (
         <Card
           key={card.id}
           className={css`
